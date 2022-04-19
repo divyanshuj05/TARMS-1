@@ -30,7 +30,7 @@ exports.insert=(req,res)=>{
             console.log("Data inserted"+data),
             res.redirect('/')})
         .catch(err=>{
-            res.send('E-mail and User id all the fields must be unique')});
+            res.send(err)});
 }
 
 exports.reset=(req,res)=>{
