@@ -2,11 +2,22 @@ const express=require("express");
 const bodyParser=require("body-parser");
 const hbs=require("hbs");
 const mongoose=require("mongoose");
+const session=require("express-session")
 const app=express();
 
 //parse requests using body parser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
+//creating session
+app.use(session(
+    {
+        secret:"c'est un secret",
+        resave:false,
+        saveUninitialized:false
+    }
+))
+wfbibwfnfklnvklnnvklen
 
 //load routes
 const routes=require("./routes/main");
