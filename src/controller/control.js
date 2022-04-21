@@ -6,6 +6,7 @@ const rooms=require('../models/rooms');
 const { response } = require('express');
 const mongoose=require("mongoose");
 const async = require('hbs/lib/async');
+const session=require('express-session');
 mongoose.connect("mongodb://localhost:27017/test",(err,coll)=>{
     if(err){
         console.error("Database not connected");
@@ -52,13 +53,15 @@ exports.login=async (req,res)=>{
     var user=req.body.User;
     var pass=req.body.Pass;
     await db.collection('users').findOne({"UserID":user,"Password":pass},(err,coll)=>{
-        if(err){console.log(err)}
+        if(err)
+        {console.log(err)}
         else{
             if(coll==null)
             {
                 res.send("Wrong credentials");
             }
             else{
+                req.session.isAuth=true;
                 res.redirect("/home");
             }
         }
