@@ -124,7 +124,7 @@ exports.changePassword= async(req,res)=>{
     });
 }
 exports.insert2=(req,res)=>{
-    const booking_form=new booking_form({
+    const booking_form=new Booking_form({
         Name:req.body.Name,
         branch:req.body.branch,
         year:req.body.year,
@@ -133,6 +133,7 @@ exports.insert2=(req,res)=>{
         purpose:req.body.purpose,
         eventDate:req.body.eventDate,
         eventTime:req.body.eventTime,
+        eventTime1:req.body.eventTime1,
         people:req.body.people,
         AC:req.body.AC,
         SS:req.body.SS
@@ -145,7 +146,15 @@ exports.insert2=(req,res)=>{
         .catch(err=>{
             res.send(err)});
 }
-
+exports.request=(req,res)=>{
+    Booking_form.find()
+    .then(user=>{
+        res.send(user)
+    })
+    .catch(err =>{
+        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
+    })
+}    
 exports.changeInfo=async (req,res)=>{
     var flag=0;
     var currPhone=req.body.mobile;
