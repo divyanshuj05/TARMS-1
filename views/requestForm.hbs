@@ -34,13 +34,13 @@
 	<div class="requestForm">
 		<h1><b>Booking Request for {{roomNo.Room_Name}}</b></h1>
 		<br>
-		<form id="ReqBook" name="form"> 
+		<form id="ReqBook" name="form" action="/api/book_form" method="POST" id="book_form"> 
 			<input type="hidden" name="roomName" value="{{roomNo.Room_Name}}" id="roomName"/>
 			<label>Name</label>
 			<il1><input type="text" id="getName" name="Name" placeholder="Enter Name"></il1>
 			<br><br>
 			<label1 for="branch">Select Branch</label1>
-			<il2><select id="branch">
+			<il2><select id="branch" name="branch">
 				<option value="CSE">CSE</option>
 				<option value="COE">COE</option>
 				<option value="Mechanical">Mechanical</option>
@@ -49,7 +49,7 @@
 				<option value="BT">Bio Technology</option>
     		</select></il2>
 			<label2 for="year">Select Year</label2>
-			<il3><select id="year">
+			<il3><select id="year" name="year">
 				<option value="1">1st</option>
 				<option value="2">2nd</option>
 				<option value="3">3rd</option>
