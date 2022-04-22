@@ -10,9 +10,7 @@ var schema=new mongoose.Schema({
         type:String,
         unique:true
     },
-    MobileNumber:{
-        type:String,
-    },
+    MobileNumber:Number,
     DOB:Date,
     Password:String
 })

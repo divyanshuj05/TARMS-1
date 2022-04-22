@@ -4,12 +4,14 @@ const controller=require('../controller/control');
 const axios=require("axios");
 const async = require("hbs/lib/async");
 const { response } = require("express");
-const rooms=require("../models/rooms")
+const rooms=require("../models/rooms");
+const session=require("express-session");
+const read = require("body-parser/lib/read");
 
 const routes=express.Router();
 
 routes.get("/",(req,res)=>{
-    res.render("login");
+    res.render('login');
 })
 
 routes.get("/signUp",(req,res)=>{
@@ -20,7 +22,17 @@ routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
 
-routes.get("/home",async(req,res)=>{
+Auth=(req,res,next)=>{
+    if(req.session.isAuth){
+        next();
+    }
+    else{
+        res.send("Login first");
+        //res.render('login')
+    }
+}
+
+routes.get("/home",Auth,async(req,res)=>{
     rooms.find()
     .then(result=>{
         res.render("home",{Rooms:result})
@@ -30,31 +42,31 @@ routes.get("/home",async(req,res)=>{
     })
 })
 
-routes.get("/home/changeInfo",(req,res)=>{
+routes.get("/home/changeInfo",Auth,(req,res)=>{
     res.render("changeInfo");
 })
 
-routes.get("/home/ChangePassword",(req,res)=>{
+routes.get("/home/ChangePassword",Auth,(req,res)=>{
     res.render("changePassword");
 })
 
-routes.get("/home/logout",(req,res)=>{
+routes.get("/home/logout",Auth,(req,res)=>{
     res.render("logout");
 })
 
-routes.get("/home/contact",(req,res)=>{
+routes.get("/home/contact",Auth,(req,res)=>{
     res.render("contact");
 })
 
-routes.get("/home/feedback",(req,res)=>{
+routes.get("/home/feedback",Auth,(req,res)=>{
     res.render("feedback")
 })
 
-routes.get("/home/personalDetails",(req,res)=>{
+routes.get("/home/personalDetails",Auth,(req,res)=>{
     res.render("personalInfo");
 })
 
-routes.get("/home/RequestForm", async(req,res)=>{
+routes.get("/home/RequestForm",Auth,async(req,res)=>{
     const result=req.query
     await rooms.findById(result.id)
     .then(data=>{
