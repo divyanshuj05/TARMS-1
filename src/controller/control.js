@@ -1,4 +1,5 @@
 const userDB=require('../models/user');
+const Booking_form=require('../models/booking_form');
 const reset=require("../models/resetPassword");
 const feed=require("../models/feedback");
 const con=require('../models/contact');
@@ -118,6 +119,28 @@ exports.changePassword= async(req,res)=>{
         }
         else{res.redirect('/home')}
     });
+}
+exports.insert2=(req,res)=>{
+    const booking_form=new booking_form({
+        Name:req.body.Name,
+        branch:req.body.branch,
+        year:req.body.year,
+        MobileNumber:req.body.mobile,
+        eventNames:req.body.event,
+        purpose:req.body.purpose,
+        eventDate:req.body.eventDate,
+        eventTime:req.body.eventTime,
+        people:req.body.people,
+        AC:req.body.AC,
+        SS:req.body.SS
+    })
+    booking_form
+        .save(booking_form)
+        .then(data=>{
+            console.log("Data inserted"+data),
+            res.redirect('/')})
+        .catch(err=>{
+            res.send(err)});
 }
 
 exports.changeInfo=async (req,res)=>{
