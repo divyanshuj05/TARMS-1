@@ -17,7 +17,7 @@ app.use(session(
         saveUninitialized:false
     }
 ))
-wfbibwfnfklnvklnnvklen
+
 
 //load routes
 const routes=require("./routes/main");
