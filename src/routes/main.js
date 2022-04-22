@@ -53,6 +53,9 @@ routes.get("/home/feedback",(req,res)=>{
 routes.get("/home/personalDetails",(req,res)=>{
     res.render("personalInfo");
 })
+routes.get("/home/my_request",(req,res)=>{
+    res.render("my_request");
+})
 
 routes.get("/home/RequestForm", async(req,res)=>{
     const result=req.query
@@ -73,4 +76,5 @@ routes.post("/api/contact",controller.contact);
 routes.put('/api/changePassword',controller.changePassword);
 routes.put('/api/changeInfo',controller.changeInfo);
 routes.post("/api/book_form",controller.insert2);
+routes.get("/api/my_request",controller.request);
 module.exports=routes;

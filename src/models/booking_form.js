@@ -8,11 +8,14 @@ var schema=new mongoose.Schema({
     eventNames:String,
     purpose:String,
     eventDate:Date,
-    eventTime:Number,
+    eventTime:String,
+    eventTime1:String,
     people:Number,
     AC:String,
     SS:String
 
+},{
+    timestamps:true
 })
 
 const Booking_form=mongoose.model('booking_form',schema);
