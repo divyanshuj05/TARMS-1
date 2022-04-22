@@ -8,7 +8,7 @@ var schema=new mongoose.Schema({
     eventNames:String,
     purpose:String,
     eventDate:Date,
-    eventTime:TimeRanges,
+    eventTime:Number,
     people:Number,
     AC:String,
     SS:String
