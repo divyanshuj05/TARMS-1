@@ -150,7 +150,7 @@ exports.contact=(req,res)=>{
         })
 }
 exports.prsnlinfo= (req,res)=>{
-    userDB.find({})
+    userDB.find()
     .then(user=>{
         res.send(user)
     })

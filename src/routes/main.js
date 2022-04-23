@@ -98,8 +98,9 @@ routes.post("/api/faculty_sign",controller.faculty_sign);
 routes.get("/api/prsnl_info",controller.prsnlinfo);
 routes.post("/api/feedback",controller.getFeedback);
 routes.post("/api/contact",controller.contact);
-routes.put('/api/changePassword',controller.changePassword);
-routes.put('/api/changeInfo',controller.changeInfo);
+routes.post('/api/changePassword',controller.changePassword);
+routes.post('/api/changeInfo',controller.changeInfo);
 routes.post("/api/book_form",controller.insert2);
 routes.get("/api/my_request",controller.request);
+
 module.exports=routes;
