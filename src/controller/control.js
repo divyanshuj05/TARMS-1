@@ -114,7 +114,7 @@ exports.prsnlinfo= (req,res)=>{
         res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
     })
 }    
-}
+
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
     var newPass=req.body.newPassword;
@@ -151,7 +151,7 @@ exports.insert2=(req,res)=>{
         .save(booking_form)
         .then(data=>{
             console.log("Data inserted"+data),
-            res.redirect('/')})
+            res.redirect('/home')})
         .catch(err=>{
             res.send(err)});
 }
