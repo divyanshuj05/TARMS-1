@@ -78,7 +78,7 @@ function validate()
     if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*]/g)  && str.length >= 8)
     {}
     else{
-        alert("Wrong password entered!!");
+        alert("Wrong password entered!!\nPassword should contain: Number,Upper-Case,Lower-Case,Special Character");
         return false;
     }
 }

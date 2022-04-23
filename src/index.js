@@ -16,6 +16,11 @@ const store=new MongoStore({
     collection:'SessionData'
 });
 
+//Catching errors
+store.on('error', function(error) {
+    console.log(error);
+  }); 
+
 //creating session
 app.use(session(
     {

@@ -79,6 +79,7 @@ routes.get("/home/feedback",Auth,(req,res)=>{
 routes.get("/home/personalDetails",Auth,(req,res)=>{
     res.render("personalInfo");
 })
+
 routes.get("/home/my_request",Auth,(req,res)=>{
     res.render("my_request");
 })
