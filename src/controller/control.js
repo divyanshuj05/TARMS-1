@@ -73,7 +73,8 @@ exports.reset=(req,res)=>{
 exports.login=async (req,res)=>{
     var user=req.body.User;
     var pass=req.body.Pass;
-    var mem1=req.body.mem1;
+    var mem1=req.body.member;
+    
 
     await db.collection('users').findOne({"UserID":user,"Password":pass,"Member_type":mem1},(err,coll)=>{
         if(err)
