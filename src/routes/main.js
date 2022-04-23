@@ -62,7 +62,10 @@ routes.get("/home/ChangePassword",Auth,(req,res)=>{
 })
 
 routes.get("/home/logout",Auth,(req,res)=>{
-    res.render("logout");
+    req.session.destroy((err)=>{
+        if(err){res.send(err||"Some error occured")}
+        else{res.render("logout");}
+    })
 })
 
 routes.get("/home/contact",Auth,(req,res)=>{
@@ -76,7 +79,7 @@ routes.get("/home/feedback",Auth,(req,res)=>{
 routes.get("/home/personalDetails",Auth,(req,res)=>{
     res.render("personalInfo");
 })
-routes.get("/home/my_request",(req,res)=>{
+routes.get("/home/my_request",Auth,(req,res)=>{
     res.render("my_request");
 })
 
