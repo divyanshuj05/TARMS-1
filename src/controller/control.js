@@ -74,9 +74,11 @@ exports.login=async (req,res)=>{
     var user=req.body.User;
     var pass=req.body.Pass;
     var mem1=req.body.member;
-    
+    var mem1=req.body.mem1;
+
 
     await db.collection('users').findOne({"UserID":user,"Password":pass,"Member_type":mem1},(err,coll)=>{
+        console.log("HEllo:"+mem1)
         if(err)
         {console.log(err)}
         else{
@@ -93,7 +95,7 @@ exports.login=async (req,res)=>{
 }
 
 
-exports.login=async (req,res)=>{
+exports.loginfaculty=async (req,res)=>{
     var user=req.body.User;
     var pass=req.body.Pass;
     var mem2=req.body.mem2;
@@ -150,15 +152,27 @@ exports.contact=(req,res)=>{
             res.send(err || "Some error occured")
         })
 }
-exports.prsnlinfo= (req,res)=>{
-    userDB.find()
-    .then(user=>{
-        res.send(user)
-    })
+exports.prsnlinfo= (req,res)=>
+{
+    if(req.query.id)
+    {
+        const id = req.query.id;
+        userDB.findById(id)
+            .then(user=>
+            {
+                if(!user)
+                {
+                    res.status(404).send({message:"Not found user with id"+id})
+                }
+                else
+                {
+                    res.send(user)
+                }
+            })
     .catch(err =>{
         res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
     })
-}    
+}   } 
 
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
