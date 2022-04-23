@@ -45,9 +45,9 @@ routes.get("/home",Auth,async(req,res)=>{
 })
 
 routes.get("/faculty",Auth,async(req,res)=>{
-    rooms.find()
+    rooms.find({"UserID":user,})
     .then(result=>{
-        res.render("home",{Rooms:result})
+        res.render("faculty",{Rooms:result})
     })
     .catch(err=>{
         res.send(err);
@@ -94,6 +94,7 @@ routes.get("/home/RequestForm",Auth,async(req,res)=>{
 routes.post("/api/signIn",controller.insert);
 routes.post("/api/reset",controller.reset);
 routes.post("/api/login",controller.login);
+routes.post("/api/login",controller.loginfaculty);
 routes.post("/api/faculty_sign",controller.faculty_sign);
 routes.get("/api/prsnl_info",controller.prsnlinfo);
 routes.post("/api/feedback",controller.getFeedback);
