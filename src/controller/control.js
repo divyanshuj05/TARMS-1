@@ -1,4 +1,5 @@
 const userDB=require('../models/user');
+const facultydb=require('../models/faculty');
 const Booking_form=require('../models/booking_form');
 const reset=require("../models/resetPassword");
 const feed=require("../models/feedback");
@@ -23,6 +24,7 @@ exports.insert=(req,res)=>{
         UserID:req.body.Uid,
         eMail:req.body.mail,
         MobileNumber:req.body.phone,
+        Member_type:req.body.mem_type,
         DOB:req.body.dob,
         Password:req.body.pass
     })
@@ -35,6 +37,24 @@ exports.insert=(req,res)=>{
             res.send(err)});
 }
 
+exports.faculty_sign=(req,res)=>{
+    const faculty=new facultydb({
+        fac_name:req.body.Name,
+        position:req.body.Position,
+        uname:req.body.Uid,
+        mob:req.body.phone,
+        Member_type:req.body.mem_type,
+        eMail:req.body.mail,
+        Password:req.body.pass
+    })
+    faculty
+        .save(faculty)
+        .then(data=>{
+            console.log("Data inserted"+data),
+            res.redirect('/faculty')})
+        .catch(err=>{
+            res.send(err)});
+}
 exports.reset=(req,res)=>{
     const mail=new reset({
         eMail:req.body.Pass,
@@ -53,7 +73,9 @@ exports.reset=(req,res)=>{
 exports.login=async (req,res)=>{
     var user=req.body.User;
     var pass=req.body.Pass;
-    await db.collection('users').findOne({"UserID":user,"Password":pass},(err,coll)=>{
+    var mem1=req.body.mem1;
+
+    await db.collection('users').findOne({"UserID":user,"Password":pass,"Member_type":mem1},(err,coll)=>{
         if(err)
         {console.log(err)}
         else{
@@ -64,6 +86,28 @@ exports.login=async (req,res)=>{
             else{
                 req.session.isAuth=true;
                 res.redirect("/home");
+            }
+        }
+    });
+}
+
+
+exports.login=async (req,res)=>{
+    var user=req.body.User;
+    var pass=req.body.Pass;
+    var mem2=req.body.mem2;
+
+    await db.collection('faculties').findOne({"uname":user,"password":pass,"Member_type":mem2},(err,coll)=>{
+        if(err)
+        {console.log(err)}
+        else{
+            if(coll==null)
+            {
+                res.send("Wrong credentials");
+            }
+            else{
+                req.session.isAuth=true;
+                res.redirect("/faculty");
             }
         }
     });
@@ -105,6 +149,15 @@ exports.contact=(req,res)=>{
             res.send(err || "Some error occured")
         })
 }
+exports.prsnlinfo= (req,res)=>{
+    userDB.find({})
+    .then(user=>{
+        res.send(user)
+    })
+    .catch(err =>{
+        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
+    })
+}    
 
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
@@ -142,7 +195,7 @@ exports.insert2=(req,res)=>{
         .save(booking_form)
         .then(data=>{
             console.log("Data inserted"+data),
-            res.redirect('/')})
+            res.redirect('/home')})
         .catch(err=>{
             res.send(err)});
 }

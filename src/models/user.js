@@ -10,6 +10,7 @@ var schema=new mongoose.Schema({
         type:String,
         unique:true
     },
+    Member_type:String,
     MobileNumber:Number,
     DOB:Date,
     Password:String

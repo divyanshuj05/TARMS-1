@@ -17,7 +17,9 @@ routes.get("/",(req,res)=>{
 routes.get("/signUp",(req,res)=>{
     res.render("signUp");
 })
-
+routes.get("/faculty_sign",(req,res)=>{
+    res.render("faculty_signup");
+})
 routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
@@ -42,6 +44,15 @@ routes.get("/home",Auth,async(req,res)=>{
     })
 })
 
+routes.get("/faculty",Auth,async(req,res)=>{
+    rooms.find()
+    .then(result=>{
+        res.render("home",{Rooms:result})
+    })
+    .catch(err=>{
+        res.send(err);
+    })
+})
 routes.get("/home/changeInfo",Auth,(req,res)=>{
     res.render("changeInfo");
 })
@@ -83,6 +94,8 @@ routes.get("/home/RequestForm",Auth,async(req,res)=>{
 routes.post("/api/signIn",controller.insert);
 routes.post("/api/reset",controller.reset);
 routes.post("/api/login",controller.login);
+routes.post("/api/faculty_sign",controller.faculty_sign);
+routes.get("/api/prsnl_info",controller.prsnlinfo);
 routes.post("/api/feedback",controller.getFeedback);
 routes.post("/api/contact",controller.contact);
 routes.put('/api/changePassword',controller.changePassword);
