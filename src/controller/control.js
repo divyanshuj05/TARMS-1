@@ -92,7 +92,16 @@ exports.login=async(req,res)=>{
             }
             else{
                 req.session.isAuth=true;
-                res.redirect("/home");
+                userDB.findOne({"UserID":user,"Password":pass,"Member_type":mem1},{projection:{_id:1}})
+                .then(data=>{
+                    const Uid=data._id;
+                    res.redirect(`/home?uid=${data._id}`);
+                })
+                .catch(err=>{
+                    console.log(err)
+                    res.send("Some error occured")
+                    return;
+                })
             }
         }
     });

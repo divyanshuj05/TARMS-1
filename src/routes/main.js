@@ -7,6 +7,8 @@ const { response } = require("express");
 const rooms=require("../models/rooms");
 const session=require("express-session");
 const read = require("body-parser/lib/read");
+const user=require('../models/user');
+const res = require("express/lib/response");
 
 const routes=express.Router();
 
@@ -17,12 +19,19 @@ routes.get("/",(req,res)=>{
 routes.get("/signUp",(req,res)=>{
     res.render("signUp");
 })
+
 routes.get("/faculty_sign",(req,res)=>{
     res.render("faculty_signup");
 })
+
 routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
+
+let detail=async function(UID)
+{
+    return await user.findOne({_id:UID})
+}
 
 Auth=(req,res,next)=>{
     if(req.session.isAuth){
@@ -37,7 +46,7 @@ Auth=(req,res,next)=>{
 routes.get("/home",Auth,async(req,res)=>{
     rooms.find()
     .then(result=>{
-        res.render("home",{Rooms:result})
+        res.render("home",{Rooms:result,uid:req.query.uid})
     })
     .catch(err=>{
         res.send(err);
@@ -53,6 +62,7 @@ routes.get("/faculty",Auth,async(req,res)=>{
         res.send(err);
     })
 })
+
 routes.get("/home/changeInfo",Auth,(req,res)=>{
     res.render("changeInfo");
 })
@@ -77,7 +87,15 @@ routes.get("/home/feedback",Auth,(req,res)=>{
 })
 
 routes.get("/home/personalDetails",Auth,(req,res)=>{
-    res.render("personalInfo");
+    const Uid=req.query.uid;
+    let User=detail(Uid);
+    User.then(function(data)
+    {
+        res.render("personalInfo",{uid:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
 
 routes.get("/home/my_request",Auth,(req,res)=>{
