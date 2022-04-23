@@ -105,7 +105,16 @@ exports.contact=(req,res)=>{
             res.send(err || "Some error occured")
         })
 }
-
+exports.prsnlinfo= (req,res)=>{
+    userDB.find()
+    .then(user=>{
+        res.send(user)
+    })
+    .catch(err =>{
+        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
+    })
+}    
+}
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
     var newPass=req.body.newPassword;
