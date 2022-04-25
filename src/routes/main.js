@@ -7,6 +7,8 @@ const { response } = require("express");
 const rooms=require("../models/rooms");
 const session=require("express-session");
 const read = require("body-parser/lib/read");
+const user=require('../models/user');
+const res = require("express/lib/response");
 
 const routes=express.Router();
 
@@ -17,12 +19,21 @@ routes.get("/",(req,res)=>{
 routes.get("/signUp",(req,res)=>{
     res.render("signUp");
 })
+
 routes.get("/faculty_sign",(req,res)=>{
     res.render("faculty_signup");
+})
+routes.get("/facultylogin",(req,res)=>{
+    res.render("facultylogin");
 })
 routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
+
+let detail=async function(UID)
+{
+    return await user.findOne({_id:UID})
+}
 
 Auth=(req,res,next)=>{
     if(req.session.isAuth){
@@ -37,7 +48,7 @@ Auth=(req,res,next)=>{
 routes.get("/home",Auth,async(req,res)=>{
     rooms.find()
     .then(result=>{
-        res.render("home",{Rooms:result})
+        res.render("home",{Rooms:result,uid:req.query.uid})
     })
     .catch(err=>{
         res.send(err);
@@ -45,7 +56,7 @@ routes.get("/home",Auth,async(req,res)=>{
 })
 
 routes.get("/faculty",Auth,async(req,res)=>{
-    rooms.find({"UserID":user,})
+    rooms.find({"uname":faculty,})
     .then(result=>{
         res.render("faculty",{Rooms:result})
     })
@@ -53,6 +64,7 @@ routes.get("/faculty",Auth,async(req,res)=>{
         res.send(err);
     })
 })
+
 routes.get("/home/changeInfo",Auth,(req,res)=>{
     res.render("changeInfo");
 })
@@ -77,8 +89,17 @@ routes.get("/home/feedback",Auth,(req,res)=>{
 })
 
 routes.get("/home/personalDetails",Auth,(req,res)=>{
-    res.render("personalInfo");
+    const Uid=req.query.uid;
+    let User=detail(Uid);
+    User.then(function(data)
+    {
+        res.render("personalInfo",{uid:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
+
 routes.get("/home/my_request",Auth,(req,res)=>{
     res.render("my_request");
 })
@@ -97,9 +118,8 @@ routes.get("/home/RequestForm",Auth,async(req,res)=>{
 routes.post("/api/signIn",controller.insert);
 routes.post("/api/reset",controller.reset);
 routes.post("/api/login",controller.login);
-routes.post("/api/login",controller.loginfaculty);
+routes.post("/api/loginfaculty",controller.loginfaculty);
 routes.post("/api/faculty_sign",controller.faculty_sign);
-routes.get("/api/prsnl_info",controller.prsnlinfo);
 routes.post("/api/feedback",controller.getFeedback);
 routes.post("/api/contact",controller.contact);
 routes.post('/api/changePassword',controller.changePassword);

@@ -13,22 +13,22 @@
   	background-size: cover;
 	}</style>
 	<div class="login"> 
-	<h2>Login</h2><br>
+	<h2>Faculty Login</h2><br>
 	<h3>Thapar ARMS<br>(Auditorium and Room Management System)</h3>
-	<form id="login" name="myForm" action="/api/login" method="post">  
+	<form id="login" name="myForm" action="/api/loginfaculty" method="post">  
 		<label><b> User Name</b></label>
-		<input type="text" id="User" name="User" placeholder="Enter username">
+		<input type="text" id="User" name="fUser" placeholder="Enter username">
 		<br><br>
 		<label><b> Password</b> </label>
-		<input type="password" id="Pass" name="Pass" placeholder="Enter password">
+		<input type="password" id="Pass" name="fPass" placeholder="Enter password">
 		<br><br>
 		{{!-- <label for="option"><b>Member Type</b></label>
 		<select id="option" name="member" required="required">
 		 <option  id="mem1" name="mem1" value="student">Student</option>
 		 <option id="mem2" name="mem2" value="faculty">Faculty</option>
     	</select> --}}
-		<input type="hidden" id="mem1" name="mem1" value="student">
 
+		<input type="hidden" id="mem2" name="mem2" value="faculty">
 
 		{{!-- <label for="mem_type">Member Type</label>
 		</br>
@@ -43,16 +43,7 @@
 		<input type="checkbox" id="check">
 		<span style="color: Black;">Remember me</span>
 		<br><br>
-		<a class="anchor" href="/forgotPassword">Forgot Password?</a>
-		<br><br>
-		<label1><b>New to ARMS?</label1>
-		<br>
-		<a class="anchor" href="/signUp">Sign-up here</a>
-		<br><br>
-		<label1><b>Are you a Faculty</label1>
-		<br>
-		<a class="anchor" href="/facultylogin">Log-in here</a>
-	
+
 	</div>
 	<script src="/js/login.js"></script>
 	<h1>{{view}}</h1>
