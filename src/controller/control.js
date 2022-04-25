@@ -140,7 +140,7 @@ exports.getFeedback=(req,res)=>{
         .save(obj)
         .then(data=>{
             console.log("Data sent "+data)
-            res.redirect('/home')
+            res.redirect('/home/feedback')
         })
         .catch(err=>{
             res.send(err || "Some error occured");
@@ -166,31 +166,6 @@ exports.contact=(req,res)=>{
             res.send(err || "Some error occured")
         })
 }
-
-
-//
-exports.prsnlinfo=(req,res)=>
-{
-    if(req.query.id)
-    {
-        const id = req.query.id;
-        userDB.findById(id)
-            .then(user=>
-            {
-                if(!user)
-                {
-                    res.status(404).send({message:"Not found user with id"+id})
-                }
-                else
-                {
-                    res.send(user)
-                }
-            })
-    .catch(err =>{
-        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
-    })
-}   } 
-
 
 //change password
 exports.changePassword= async(req,res)=>{
