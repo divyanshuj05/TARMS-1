@@ -72,9 +72,9 @@ routes.get("/home",Auth,async(req,res)=>{
 })
 
 routes.get("/faculty",Auth,async(req,res)=>{
-    rooms.find({"UserID":user,})
+    rooms.find()
     .then(result=>{
-        res.render("faculty",{Rooms:result})
+        res.render("faculty",{Status:"On Hold"})
     })
     .catch(err=>{
         res.send(err);
