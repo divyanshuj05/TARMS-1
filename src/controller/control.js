@@ -18,6 +18,7 @@ mongoose.connect("mongodb://localhost:27017/test",(err,coll)=>{
 });
 var db=mongoose.connection;
 
+//insert student into database
 exports.insert=(req,res)=>{
     const user=new userDB({
         Name:req.body.Name,
@@ -37,6 +38,7 @@ exports.insert=(req,res)=>{
             res.send(err)});
 }
 
+//insert faculty into database
 exports.faculty_sign=(req,res)=>{
     const faculty=new facultydb({
         fac_name:req.body.Name,
@@ -55,6 +57,8 @@ exports.faculty_sign=(req,res)=>{
         .catch(err=>{
             res.send(err)});
 }
+
+//Forgot Password 
 exports.reset=(req,res)=>{
     const mail=new reset({
         eMail:req.body.Pass,
@@ -74,12 +78,15 @@ exports.reset=(req,res)=>{
 exports.login=async(req,res)=>{
     var user=req.body.User;
     var pass=req.body.Pass;
+    var mem1=req.body.member;
     var mem1=req.body.mem1;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
 
     await db.collection('users').findOne({"UserID":user,"Password":pass,"Member_type":mem1},(err,coll)=>{
-        console.log("HEllo:"+mem1)
         if(err)
         {console.log(err)}
         else{
@@ -145,6 +152,7 @@ exports.getFeedback=(req,res)=>{
         })
 }
 
+//get contact response into database
 exports.contact=(req,res)=>{
     var obj=new con({
         Name:req.body.name,
@@ -163,8 +171,35 @@ exports.contact=(req,res)=>{
             res.send(err || "Some error occured")
         })
 }
+<<<<<<< HEAD
  
+=======
 
+//
+exports.prsnlinfo=(req,res)=>
+{
+    if(req.query.id)
+    {
+        const id = req.query.id;
+        userDB.findById(id)
+            .then(user=>
+            {
+                if(!user)
+                {
+                    res.status(404).send({message:"Not found user with id"+id})
+                }
+                else
+                {
+                    res.send(user)
+                }
+            })
+    .catch(err =>{
+        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
+    })
+}   } 
+>>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
+
+//change password
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
     var newPass=req.body.newPassword;
@@ -182,6 +217,8 @@ exports.changePassword= async(req,res)=>{
         else{res.redirect('/home')}
     });
 }
+
+//get data of request form
 exports.insert2=(req,res)=>{
     const booking_form=new Booking_form({
         Name:req.body.Name,
@@ -206,6 +243,8 @@ exports.insert2=(req,res)=>{
         .catch(err=>{
             res.send(err)});
 }
+
+//get all booking requests
 exports.request=(req,res)=>{
     Booking_form.find()
     .then(user=>{
@@ -214,7 +253,9 @@ exports.request=(req,res)=>{
     .catch(err =>{
         res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
     })
-}    
+}   
+
+//change basic details of user
 exports.changeInfo=async (req,res)=>{
     var flag=0;
     var currPhone=req.body.mobile;

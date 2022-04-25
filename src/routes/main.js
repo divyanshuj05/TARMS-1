@@ -23,9 +23,13 @@ routes.get("/signUp",(req,res)=>{
 routes.get("/faculty_sign",(req,res)=>{
     res.render("faculty_signup");
 })
+<<<<<<< HEAD
 routes.get("/facultylogin",(req,res)=>{
     res.render("facultylogin");
 })
+=======
+
+>>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
 routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
@@ -98,6 +102,7 @@ routes.get("/home/personalDetails",Auth,(req,res)=>{
         console.log(err)
         res.send("Some error occured")
     })
+<<<<<<< HEAD
 })
 routes.get("/faculty/showdetail",Auth,(req,res)=>{
     const RUid=req.query.rooms;
@@ -109,7 +114,10 @@ routes.get("/faculty/showdetail",Auth,(req,res)=>{
         console.log(err)
         res.send("Some error occured")
     })
+=======
+>>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
 })
+
 routes.get("/home/my_request",Auth,(req,res)=>{
     res.render("my_request");
 })
