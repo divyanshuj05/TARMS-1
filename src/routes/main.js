@@ -10,7 +10,7 @@ const read = require("body-parser/lib/read");
 const user=require('../models/user');
 const res = require("express/lib/response");
 const { aggregate } = require("../models/user");
-const bookingForm=require('../models/booking_form')
+const Booking_form = require("../models/booking_form");
 
 const routes=express.Router();
 
@@ -78,7 +78,7 @@ routes.get("/faculty",Auth,async(req,res)=>{
     rooms.find({"Status":"On Hold"})
 
     .then(result=>{
-        res.render("faculty",{Status:"On Hold"})
+        res.render("faculty",{Rooms:result})
     })
     .catch(err=>{
         res.send(err);
@@ -144,10 +144,40 @@ routes.get("/home/personalDetails",Auth,(req,res)=>{
     })
 
 })
+
+/* Booking_form.aggregate({
+    $lookup: {
+        from: "rooms", // collection to join
+        localField: "Room_Name",//field from the input documents
+        foreignField: "Room_Name",//field from the documents of the "from" collection
+        as: "Room_Name"// output array field
+    }
+
+},function (error, data) {
+    console.log(data);
+  return res.send(data);
+}) */
+
 routes.get("/faculty/showdetail",Auth,(req,res)=>{
+    rooms.find({"Room_Name":""})
+    
+    Booking_form.aggregate([{
+        $lookup: {
+            from: "rooms", // collection to join
+            localField: "Room_Name",//field from the input documents
+            foreignField: "Room_Name",//field from the documents of the "from" collection
+            as: "Room_Name"// output array field
+        }}])
+        .then(data=>{
+            console.log(data.Room_Name)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        //console.log(bk1)
     const Ruid=req.query.id;
     //let Rooms=detail(RUid);
-    aggregate.lookup({from:'bookingForm',localField:'Room_Name',foreignField:'Room_Name',as:'joinRoom'});
+    //aggregate.lookup({from:'booking_Form',localField:'Room_Name',foreignField:'Room_Name',as:'joinRoom'});
     Rooms.then(function(data)
     {
         res.render("showdetail",{rooms:data});
