@@ -102,7 +102,7 @@ routes.get("/home/personalDetails",Auth,(req,res)=>{
         console.log(err)
         res.send("Some error occured")
     })
-<<<<<<< HEAD
+
 })
 routes.get("/faculty/showdetail",Auth,(req,res)=>{
     const RUid=req.query.rooms;
@@ -114,8 +114,7 @@ routes.get("/faculty/showdetail",Auth,(req,res)=>{
         console.log(err)
         res.send("Some error occured")
     })
-=======
->>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
+
 })
 
 routes.get("/home/my_request",Auth,(req,res)=>{
