@@ -47,7 +47,7 @@ exports.faculty_sign=(req,res)=>{
         mob:req.body.phone,
         Member_type:req.body.mem_type,
         eMail:req.body.mail,
-        Password:req.body.pass
+        password:req.body.pass
     })
     faculty
         .save(faculty)
@@ -109,8 +109,8 @@ exports.login=async(req,res)=>{
 
 //login faculty
 exports.loginfaculty=async (req,res)=>{
-    var user=req.body.User;
-    var pass=req.body.Pass;
+    var user=req.body.fUser;
+    var pass=req.body.fPass;
     var mem2=req.body.mem2;
 
     await db.collection('faculties').findOne({"uname":user,"password":pass,"Member_type":mem2},(err,coll)=>{
@@ -167,6 +167,7 @@ exports.contact=(req,res)=>{
         })
 }
 
+
 //
 exports.prsnlinfo=(req,res)=>
 {
@@ -189,6 +190,7 @@ exports.prsnlinfo=(req,res)=>
         res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
     })
 }   } 
+
 
 //change password
 exports.changePassword= async(req,res)=>{
@@ -216,6 +218,7 @@ exports.insert2=(req,res)=>{
         branch:req.body.branch,
         year:req.body.year,
         MobileNumber:req.body.mobile,
+        society:req.body.society,
         eventNames:req.body.event,
         purpose:req.body.purpose,
         eventDate:req.body.eventDate,
@@ -250,13 +253,16 @@ exports.changeInfo=async (req,res)=>{
     var flag=0;
     var currPhone=req.body.mobile;
     var currID=req.body.userID;
+    var currname=req.body.name1;
     var newPhone=req.body.mobile2;
     var newID=req.body.userID2;
+    var newname=req.body.name2;
+
     if(currID==newID)
     {
         flag=1;
     }
-    const result1=await db.collection("users").findOne({"UserID":currID,"MobileNumber":currPhone});
+    const result1=await db.collection("users").findOne({"UserID":currID,"MobileNumber":currPhone,"Name":currname});
     const result=await db.collection("users").findOne({"UserID":newID});
     if(result1==null)
     {
@@ -270,7 +276,7 @@ exports.changeInfo=async (req,res)=>{
     }
     else
     {
-        await userDB.updateOne({"UserID":currID,"MobileNumber":currPhone},{$set:{"UserID":newID,"MobileNumber":newPhone}},function(error,data)
+        await userDB.updateOne({"UserID":currID,"MobileNumber":currPhone,"Name":currname},{$set:{"UserID":newID,"MobileNumber":newPhone,"Name":newname}},function(error,data)
         {
             if(error)
             {

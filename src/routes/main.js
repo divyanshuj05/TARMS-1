@@ -24,6 +24,10 @@ routes.get("/faculty_sign",(req,res)=>{
     res.render("faculty_signup");
 })
 
+routes.get("/facultylogin",(req,res)=>{
+    res.render("facultylogin");
+})
+
 routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
@@ -134,6 +138,19 @@ routes.get("/home/personalDetails",Auth,(req,res)=>{
         console.log(err)
         res.send("Some error occured")
     })
+
+})
+routes.get("/faculty/showdetail",Auth,(req,res)=>{
+    const RUid=req.query.rooms;
+    let Rooms=detail(RUid);
+    Rooms.then(function(data)
+    {
+        res.render("showdetail",{rooms:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
+
 })
 
 routes.get("/home/my_request",Auth,(req,res)=>{
@@ -156,7 +173,6 @@ routes.post("/api/reset",controller.reset);
 routes.post("/api/login",controller.login);
 routes.post("/api/loginfaculty",controller.loginfaculty);
 routes.post("/api/faculty_sign",controller.faculty_sign);
-routes.get("/api/prsnl_info",controller.prsnlinfo);
 routes.post("/api/feedback",controller.getFeedback);
 routes.post("/api/contact",controller.contact);
 routes.post('/api/changePassword',controller.changePassword);

@@ -5,6 +5,7 @@ var schema=new mongoose.Schema({
     branch:String,
     year:Number,
     MobileNumber:Number,
+    society:String,
     eventNames:String,
     purpose:String,
     eventDate:Date,
