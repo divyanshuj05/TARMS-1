@@ -103,12 +103,15 @@ il2{
 il3{
 	float: right;
 	margin-right: 100px;
+<<<<<<< ours
 }
 il4{
 	float: right;
 	margin-right: 100px;
+=======
+>>>>>>> theirs
 }
-il5{
+il4{
 	float: right;
 	margin-right: 100px;
 }
