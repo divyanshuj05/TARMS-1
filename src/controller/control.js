@@ -81,10 +81,6 @@ exports.login=async(req,res)=>{
     var mem1=req.body.member;
     var mem1=req.body.mem1;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
 
     await db.collection('users').findOne({"UserID":user,"Password":pass,"Member_type":mem1},(err,coll)=>{
         if(err)
@@ -171,9 +167,7 @@ exports.contact=(req,res)=>{
             res.send(err || "Some error occured")
         })
 }
-<<<<<<< HEAD
- 
-=======
+
 
 //
 exports.prsnlinfo=(req,res)=>
@@ -197,7 +191,7 @@ exports.prsnlinfo=(req,res)=>
         res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
     })
 }   } 
->>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
+
 
 //change password
 exports.changePassword= async(req,res)=>{

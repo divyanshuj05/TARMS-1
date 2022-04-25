@@ -23,13 +23,11 @@ routes.get("/signUp",(req,res)=>{
 routes.get("/faculty_sign",(req,res)=>{
     res.render("faculty_signup");
 })
-<<<<<<< HEAD
+
 routes.get("/facultylogin",(req,res)=>{
     res.render("facultylogin");
 })
-=======
 
->>>>>>> c3789a989eade21835167b2fd013c8b7987ff47e
 routes.get("/forgotPassword",(req,res)=>{
     res.render("forgotPassword");
 })
