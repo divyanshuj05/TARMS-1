@@ -31,33 +31,28 @@
 	</div>
 	<br><hr>
 	<div id="booking">
-		<label>Select Date: <input type="date" id="myDate"></label>
-		
-		<a class="fill" href="">Search</a>
+
 		<br>
 		<table>
 			<tr>
 				<th>Room Number</th>
 				<th>Room Name</th>
-				<th>Status</th>
-				<th>Booking</th>
+				<th>Booking Details</th>
+				<th>Response</th>
 			</tr>
-			{{#each Rooms}}
+
 			<tr>
 				<td>{{Room_Number}}</td>
 				<td>{{Room_Name}}</td>
-				<td>{{Status}}</td>
-				<td><a href="/home/RequestForm?id={{_id}}" id="{{Room_Number}}" onmousedown=validate()>Book Now</a></td>
+				<td><a href="/home/showdetail?id={{_id}}" id="{{Room_Number}}" onmousedown=validate()>Show info</a></td>
+				<td><input type="button" value="Accept"><input type="button" value="Reject"></td>
 				<script>
 					if("{{Status}}"!="Available"){
-						let x=document.getElementById("{{Room_Number}}");
-						x.style.pointerEvents="none";
-						x.style.backgroundColor="rgb(200,200,200)";
-						x.style.color="black";
+
 					}
 				</script>
 			</tr>
-			{{/each}}
+
 		</table>
 	</div>
 	<script src="/js/home.js"></script>

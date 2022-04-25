@@ -56,7 +56,7 @@ routes.get("/home",Auth,async(req,res)=>{
 })
 
 routes.get("/faculty",Auth,async(req,res)=>{
-    rooms.find({"uname":faculty,})
+    rooms.find({"UserID":user,})
     .then(result=>{
         res.render("faculty",{Rooms:result})
     })
@@ -99,7 +99,17 @@ routes.get("/home/personalDetails",Auth,(req,res)=>{
         res.send("Some error occured")
     })
 })
-
+routes.get("/faculty/showdetail",Auth,(req,res)=>{
+    const RUid=req.query.rooms;
+    let Rooms=detail(RUid);
+    Rooms.then(function(data)
+    {
+        res.render("showdetail",{rooms:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
+})
 routes.get("/home/my_request",Auth,(req,res)=>{
     res.render("my_request");
 })
