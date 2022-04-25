@@ -48,11 +48,25 @@ Auth=(req,res,next)=>{
 }
 
 routes.get("/home",Auth,async(req,res)=>{
+    var userName='hello';
+    async function getName()
+    {
+        let User=detail(req.query.uid);
+        User.then(data=>
+        {
+            userName=data.Name;
+        }).catch(err=>{
+            console.log(err)
+            res.send("Some error occured")
+        })
+    }
+    await getName()
     rooms.find()
     .then(result=>{
-        res.render("home",{Rooms:result,uid:req.query.uid})
+        res.render("home",{Rooms:result,uid:req.query.uid,name:userName})
     })
     .catch(err=>{
+        console.log(err)
         res.send(err);
     })
 })
@@ -68,7 +82,15 @@ routes.get("/faculty",Auth,async(req,res)=>{
 })
 
 routes.get("/home/changeInfo",Auth,(req,res)=>{
-    res.render("changeInfo");
+    var id=req.query.uid;
+    let User=detail(id);
+    User.then(function(data)
+    {
+        res.render("changeInfo",{uid:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
 
 routes.get("/home/ChangePassword",Auth,(req,res)=>{
@@ -83,11 +105,27 @@ routes.get("/home/logout",Auth,(req,res)=>{
 })
 
 routes.get("/home/contact",Auth,(req,res)=>{
-    res.render("contact");
+    var id=req.query.uid;
+    let User=detail(id);
+    User.then(function(data)
+    {
+        res.render("contact",{uid:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
 
 routes.get("/home/feedback",Auth,(req,res)=>{
-    res.render("feedback")
+    var id=req.query.uid;
+    let User=detail(id);
+    User.then(function(data)
+    {
+        res.render("feedback",{uid:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
 
 routes.get("/home/personalDetails",Auth,(req,res)=>{

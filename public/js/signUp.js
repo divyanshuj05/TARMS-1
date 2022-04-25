@@ -75,7 +75,7 @@ function validate()
     }
 
     let str=document.forms["form"]["pass"].value;
-    if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*]/g)  && str.length >= 8)
+    if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*!]/g)  && str.length >= 8)
     {}
     else{
         alert("Wrong password entered!!\nPassword should contain: Number,Upper-Case,Lower-Case,Special Character");

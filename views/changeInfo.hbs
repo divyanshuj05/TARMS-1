@@ -15,19 +15,19 @@
 	 }
 	</style>
 	<div class="support">
-	<p>Welcome User</p>
-	<a href="/home/contact" class="link1">Contact Us</a>
-	<a href="/home/feedback" class="link1">Feedback</a>
+	<p>Welcome {{uid.Name}}</p>
+	<a href="/home/contact?uid={{uid._id}}" class="link1">Contact Us</a>
+	<a href="/home/feedback?uid={{uid._id}}" class="link1">Feedback</a>
 	<br>
 	<!--<a href="#" class="link2">Sign Out</a>-->
 	</div>
 	<div class="promote">
 		<h2><b>Thapar ARMS<br>Auditorium and Room Management System</b></h2>
 		<a class="a" href="/home/logout">Log<br>Out</a>
-		<a class="a" href="/home/ChangePassword">Change<br>Password</a>
-		<a class="a" href="/home/my_request">My<br>Requests</a>
-		<a class="a" href="/home/changeInfo">Edit<br>Info</a>
-		<a class="a" href="/home/personalDetails">Personal<br>Info</a>
+		<a class="a" href="/home/ChangePassword?uid={{uid._id}}">Change<br>Password</a>
+		<a class="a" href="/home/my_request?uid={{uid._id}}">My<br>Requests</a>
+		<a class="a" href="/home/changeInfo?uid={{uid._id}}">Edit<br>Info</a>
+		<a class="a" href="/home/personalDetails?uid={{uid._id}}">Personal<br>Info</a>
 		<br><br>
 		<a href="/home"><button class="bookNow">Book Now</button></a>
 	</div>
@@ -39,12 +39,12 @@
 		<br><br><br>
 		<label>Current Mobile</label>	
 		<form action="/api/changeInfo" method="post">
-		<inputLabel><input type="number" id="curr_mob" name="mobile" placeholder="Current Mobile Number"></inputLabel>
+		<inputLabel><input type="number" id="curr_mob" name="mobile" placeholder="Current Mobile Number" value="{{uid.MobileNumber}}"></inputLabel>
 		<inputLabel1><input type="number" id="new_mob" name="mobile2" placeholder="New Mobile Number"></inputLabel1>
 		<label3>New Mobile</label3>
 		<br><br>
 		<label>Current User-ID</label>
-		<inputLabel2><input type="text" id="curr_uid" name="userID" placeholder="Current User-ID"></inputLabel2>
+		<inputLabel2><input type="text" id="curr_uid" name="userID" placeholder="Current User-ID" value="{{uid.UserID}}"></inputLabel2>
 		<inputLabel3><input type="text" id="new_uid" name="userID2" placeholder="New User-ID"></inputLabel3>
 		<label4>New User-ID</label4>
 		<br><br>
