@@ -140,7 +140,7 @@ exports.getFeedback=(req,res)=>{
         .save(obj)
         .then(data=>{
             console.log("Data sent "+data)
-            res.redirect('/home')
+            res.redirect('/home/feedback')
         })
         .catch(err=>{
             res.send(err || "Some error occured");
@@ -167,31 +167,6 @@ exports.contact=(req,res)=>{
         })
 }
 
-
-//
-exports.prsnlinfo=(req,res)=>
-{
-    if(req.query.id)
-    {
-        const id = req.query.id;
-        userDB.findById(id)
-            .then(user=>
-            {
-                if(!user)
-                {
-                    res.status(404).send({message:"Not found user with id"+id})
-                }
-                else
-                {
-                    res.send(user)
-                }
-            })
-    .catch(err =>{
-        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
-    })
-}   } 
-
-
 //change password
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
@@ -214,6 +189,7 @@ exports.changePassword= async(req,res)=>{
 //get data of request form
 exports.insert2=(req,res)=>{
     const booking_form=new Booking_form({
+        Room_Name:req.body.roomName,
         Name:req.body.Name,
         branch:req.body.branch,
         year:req.body.year,

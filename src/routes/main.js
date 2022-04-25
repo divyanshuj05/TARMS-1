@@ -9,6 +9,8 @@ const session=require("express-session");
 const read = require("body-parser/lib/read");
 const user=require('../models/user');
 const res = require("express/lib/response");
+const { aggregate } = require("../models/user");
+const bookingForm=require('../models/booking_form')
 
 const routes=express.Router();
 
@@ -72,7 +74,9 @@ routes.get("/home",Auth,async(req,res)=>{
 })
 
 routes.get("/faculty",Auth,async(req,res)=>{
-    rooms.find()
+
+    rooms.find({"Status":"On Hold"})
+
     .then(result=>{
         res.render("faculty",{Status:"On Hold"})
     })
@@ -141,8 +145,9 @@ routes.get("/home/personalDetails",Auth,(req,res)=>{
 
 })
 routes.get("/faculty/showdetail",Auth,(req,res)=>{
-    const RUid=req.query.rooms;
-    let Rooms=detail(RUid);
+    const Ruid=req.query.id;
+    //let Rooms=detail(RUid);
+    aggregate.lookup({from:'bookingForm',localField:'Room_Name',foreignField:'Room_Name',as:'joinRoom'});
     Rooms.then(function(data)
     {
         res.render("showdetail",{rooms:data});
