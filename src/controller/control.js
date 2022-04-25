@@ -26,7 +26,7 @@ exports.insert=(req,res)=>{
         eMail:req.body.mail,
         MobileNumber:req.body.phone,
         Member_type:req.body.mem_type,
-        DOB:req.body.dob,
+        DOB:today,
         Password:req.body.pass
     })
     user
@@ -136,7 +136,6 @@ exports.getFeedback=(req,res)=>{
         Rating:req.body.rate,
         Date:new Date()
     })
-
     obj 
         .save(obj)
         .then(data=>{

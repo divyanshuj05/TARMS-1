@@ -10,7 +10,7 @@
                 <h1> Submit your feedback</h1>
                 <form name ="form" action="/api/feedback" method="post">
                 <label for="name"><b>Enter your name</b></label><br>
-                <input type="text" id="name" name="name" placeholder="Your Name"><br><br>
+                <input type="text" id="name" name="name" placeholder="Your Name" value="{{uid.Name}}"><br><br>
                 <label><b>Rate your experience on this website</b></label><br><br>
                 <input type="radio" name="rate" value="5 star">
                 <label1>5 Star</label1><br>
@@ -25,7 +25,7 @@
                 <input type="reset">
                 <input type="submit" onmousedown=validate()><br><br>
                 </form>
-                <h3>For more detailed feedback <a href="/home/contact">Click here</a>. Thank You</h3>
+                <h3>For more detailed feedback <a href="/home/contact?uid={{uid._id}}">Click here</a>. Thank You</h3>
             </div>
         </div>
         <script src="/js/feedback.js"></script>

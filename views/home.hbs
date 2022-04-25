@@ -16,18 +16,18 @@
 	</style>
 	
 	<div class="support">
-		<p>Welcome User</p>
-		<a href="/home/contact" class="link1">Contact Us</a>
-		<a href="/home/feedback" class="link1">Feedback</a>
+		<p>Welcome {{name}}</p>
+		<a href="/home/contact?uid={{uid}}" class="link1">Contact Us</a>
+		<a href="/home/feedback?uid={{uid}}" class="link1">Feedback</a>
 		<br>
 		<!--<a href="#" class="link2">Sign Out</a>-->
 	</div>
 	<div class="promote">
 		<h1><b>Thapar ARMS<br>Auditorium and Room Management System</b></h1>
 		<a href="/home/logout">Log<br>Out</a>
-		<a href="/home/ChangePassword">Change Password</a>
-		<a href="/home/my_request">My<br>Requests</a>
-		<a href="/home/changeInfo">Edit<br>Info</a>
+		<a href="/home/ChangePassword?uid={{uid}}">Change Password</a>
+		<a href="/home/my_request?uid={{uid}}">My<br>Requests</a>
+		<a href="/home/changeInfo?uid={{uid}}">Edit<br>Info</a>
 		<a href="/home/personalDetails?uid={{uid}}">Personal<br>Info</a>
 		<br>
 	</div>
@@ -49,7 +49,7 @@
 				<td>{{Room_Number}}</td>
 				<td>{{Room_Name}}</td>
 				<td>{{Status}}</td>
-				<td><a href="/home/RequestForm?id={{_id}}" id="{{Room_Number}}" onmousedown=validate()>Book Now</a></td>
+				<td><a href="/home/RequestForm?id={{_id}}&uid={{uid}}" id="{{Room_Number}}" onmousedown=validate()>Book Now</a></td>
 				<script>
 					if("{{Status}}"!="Available"){
 						let x=document.getElementById("{{Room_Number}}");
