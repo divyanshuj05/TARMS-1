@@ -48,7 +48,7 @@
 				<td>{{Room_Number}}</td>
 				<td>{{Room_Name}}</td>
 				<td>{{Status}}</td>
-				<td><a href="/home/RequestForm?id={{_id}}&uid={{uid}}" id="{{Room_Number}}" onmousedown=validate()>Book Now</a></td>
+				<td><a href="/home/RequestForm?id={{_id}}&uid={{../uid}}" id="{{Room_Number}}" onmousedown=validate()>Book Now</a></td>
 				<script>
 					if("{{Status}}"!="Available"){
 						let x=document.getElementById("{{Room_Number}}");

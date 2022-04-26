@@ -72,7 +72,7 @@ function validate()
     }
 
     let r2=document.forms["form"]["SS"].value;
-    if(r1=="")
+    if(r2=="")
     {
         alert("Speaker System requirement not filled");
         return false;

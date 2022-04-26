@@ -15,20 +15,20 @@
 	 }
 	</style>
 	<div class="support">
-		<p>Welcome User</p>
-		<a href="/home/contact" class="link1">Contact Us</a>
-		<a href="/home/feedback" class="link1">Feedback</a>
+		<p>Welcome {{user.Name}}</p>
+		<a href="/home/contact?uid={{user._id}}" class="link1">Contact Us</a>
+		<a href="/home/feedback?uid={{user._id}}" class="link1">Feedback</a>
 		<br>
 		<!--<a href="#" class="link2">Sign Out</a>-->
-		<a href="/home" class="link1">Back to Booking Page</a>
+		<a href="/home?uid={{user._id}}" class="link1">Back to Booking Page</a>
 	</div>
 	<div class="promote">
 		<h2><b>Thapar ARMS<br>Auditorium and Room Management System</b></h2>
 		<a href="/home/logout">Log<br>Out</a>
-		<a href="/home/ChangePassword">Change<br>Password</a>
+		<a href="/home/ChangePassword?uid={{user._id}}">Change<br>Password</a>
 		<a href="">My<br>Requests</a>
-		<a href="/home/changeInfo">Edit<br>Info</a>
-		<a href="/home/personalDetails">Personal<br>Info</a>
+		<a href="/home/changeInfo?uid={{user._id}}">Edit<br>Info</a>
+		<a href="/home/personalDetails?uid={{user._id}}">Personal<br>Info</a>
 		<br><br>
 	</div>
 	<div class="requestForm">
@@ -37,7 +37,7 @@
 		<form id="ReqBook" name="form" action="/api/book_form" method="POST" id="book_form"> 
 			<input type="hidden" name="roomName" value="{{roomNo.Room_Name}}" id="roomName"/>
 			<label>Name</label>
-			<il1><input type="text" id="getName" name="Name" placeholder="Enter Name"></il1>
+			<il1><input type="text" id="getName" name="Name" placeholder="Enter Name" value="{{user.Name}}"></il1>
 			<br><br>
 			<label1 for="branch">Select Branch</label1>
 			<il2><select id="branch" name="branch">
@@ -57,7 +57,7 @@
     		</select></il3>
 			<br><br>
 			<label>Mobile Number</label>
-			<il4><input type="number" id="getMobile" name="mobile" placeholder="Enter Mobile Number"></il4>
+			<il4><input type="number" id="getMobile" name="mobile" placeholder="Enter Mobile Number" value="{{user.MobileNumber}}"></il4>
 			<br><br>
 			<label for="society">Society</label>
 			<il5><select id="society" name="society">
@@ -102,6 +102,8 @@
 			<br><br><br>
 			<R1><input type="reset" value="Reset"></R1>
 			<input type=submit style="margin-left: 150px;" onmousedown="validate()">
+			<input type="hidden" name="id" value="{{user._id}}">
+			<input type="hidden" name="Rid" value="{{roomNo._id}}">
 		</form>
 		
 	</div>

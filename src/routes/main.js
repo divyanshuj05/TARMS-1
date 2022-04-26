@@ -44,7 +44,7 @@ Auth=(req,res,next)=>{
         next();
     }
     else{
-        res.send("Login first");
+        res.send("Login first @ http://localhost:3000/");
         //res.render('login')
     }
 }
@@ -96,7 +96,15 @@ routes.get("/home/changeInfo",Auth,(req,res)=>{
 })
 
 routes.get("/home/ChangePassword",Auth,(req,res)=>{
-    res.render("changePassword");
+    var id=req.query.uid;
+    let User=detail(id);
+    User.then(function(data)
+    {
+        res.render("changePassword",{uid:data});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
 
 routes.get("/home/logout",Auth,(req,res)=>{
@@ -162,9 +170,22 @@ routes.get("/home/my_request",Auth,(req,res)=>{
 
 routes.get("/home/RequestForm",Auth,async(req,res)=>{
     const result=req.query
+    var userData='hello';
+    async function getName()
+    {
+        let User=detail(result.uid);
+        User.then(data=>
+        {
+            userData=data;
+        }).catch(err=>{
+            console.log(err)
+            res.send("Some error occured")
+        })
+    }
+    await getName()
     await rooms.findById(result.id)
     .then(data=>{
-        res.render('requestForm',{roomNo:data})
+        res.render('requestForm',{roomNo:data,user:userData})
     })
     .catch(err=>{
         res.send(err)
@@ -181,6 +202,5 @@ routes.post("/api/contact",controller.contact);
 routes.post('/api/changePassword',controller.changePassword);
 routes.post('/api/changeInfo',controller.changeInfo);
 routes.post("/api/book_form",controller.insert2);
-routes.get("/api/my_request",controller.request);
 
 module.exports=routes;

@@ -31,6 +31,7 @@
                 <input type="email" id="mail" name="mail" placeholder="Input email (thapar.edu)" value="{{uid.eMail}}"><br><br>
                 <label for="message">Drop down your message</label><br>
                 <input type="text" id="mess" name="message" maxlength=300 placeholder="Write your message (in 300 words)"><br><br><br>
+                <input type="hidden" name="id" value="{{uid._id}}">
                 <input type="reset">
                 <input type="submit" onmousedown=validate()>
             </form>
