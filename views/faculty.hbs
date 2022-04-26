@@ -40,13 +40,20 @@
 				<th>Booking Details</th>
 				<th>Response</th>
 			</tr>
-			
+
 {{#each Rooms}}
 			<tr>
 				<td>{{Room_Number}}</td>
 				<td>{{Room_Name}}</td>
 				<td><a href="/faculty/showdetail?id={{Room_Name}}" id="{{Room_Number}}" onmousedown=validate()>Show info</a></td>
 				<td><input type="button" value="Accept"><input type="button" value="Reject"></td>
+
+				<script>
+					if("{{Status}}"!="Available"){
+						
+					}
+				</script>
+
 			</tr>
 {{/each}}
 		</table>
