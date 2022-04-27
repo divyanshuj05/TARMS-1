@@ -1,6 +1,40 @@
 function validate()
 {
-    
+    var res=common();
+    if(res==false)
+    {
+        return false;
+    }
+    let date=document.forms["form"]["dob"].value;
+    if(date=="")
+    {
+        alert("Choose your date of birth first");
+
+        return false;
+    }
+
+    let str=document.forms["form"]["pass"].value;
+    if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*!]/g)  && str.length >= 8)
+    {}
+    else{
+        alert("Wrong password entered!!\nPassword should contain: Number,Upper-Case,Lower-Case,Special Character");
+        return false;
+    }
+}
+function validate1()
+{
+    var res=common();
+    if(res==false){
+        return false;
+    }
+    let position=document.forms["form"]["Position"].value;
+    if(position=="")
+    {
+        alert("Fill 'position' field!!")
+    }
+}
+function common()
+{
     let x=document.forms["form"]["Name"].value;
     if(x=="")
     {
@@ -64,21 +98,6 @@ function validate()
     }
     else{
         alert("Length of mobile number is not 10!!")
-        return false;
-    }
-
-    let date=document.forms["form"]["dob"].value;
-    if(date=="")
-    {
-        alert("Choose your date of birth first");
-        return false;
-    }
-
-    let str=document.forms["form"]["pass"].value;
-    if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*!]/g)  && str.length >= 8)
-    {}
-    else{
-        alert("Wrong password entered!!\nPassword should contain: Number,Upper-Case,Lower-Case,Special Character");
         return false;
     }
 }

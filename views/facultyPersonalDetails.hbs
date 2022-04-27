@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Personal Information</title>
+	<link rel="stylesheet" href="/css/personalInfo.css">
+</head> 
+<body>
+<style>
+	 body
+	 {
+		background-image: url("https://th.bing.com/th/id/Rc7f8f0025f585bbf8abebfeae1a50cfe?rik=PVQ2choBn6BRQA&riu=http%3a%2f%2fimg.collegepravesh.com%2f2014%2f12%2fThapar-University.jpg&ehk=CCOy468fwERBONZm5Dhv%2fG8BdT6U5ansGCbgjFc4dEQ%3d&risl=&pid=ImgRaw");
+		background-repeat:no-repeat;
+		background-attachment: fixed;
+  		background-size: cover;
+	 }
+	</style>
+	<div class="support">
+		<p>Welcome {{uid.fac_name}}</p>
+		<!--<a href="/home/contact?uid={{uid._id}}" class="link1">Contact Us</a>
+		<a href="/home/feedback?uid={{uid._id}}" class="link1">Feedback</a>-->
+		<br>
+		<!--<a href="#" class="link2">Sign Out</a>-->
+	</div>
+	<div class="promote">
+		<label2><b>Thapar ARMS<br>Auditorium and Room Management System</b></label2>
+		<a class="a" href="/home/logout">Log<br>Out</a>
+		<a class="a" href="/faculty/ChangePassword?uid={{uid._id}}">Change<br>Password</a>
+		<!--<a class="a" href="/home/my_request?uid={{uid._id}}">My<br>Requests</a>-->
+		<a class="a" href="/faculty/changeInfo?uid={{uid._id}}">Edit<br>Info</a>
+		<a class="a" href="/faculty/personalDetails?uid={{uid._id}}">Personal<br>Info</a>
+		<br><br>
+		<a href="/faculty?uid={{uid._id}}"><button class="bookNow">Home Page</button></a>
+	</div>
+	<div class="details">
+		<h1><b>Personal Details</b></h1>
+		<br>
+		<label>Name</label>
+		<il1><input type="button" id="abc" name="name" value="{{uid.fac_name}}"></il1>
+		<br><br>
+		<label>User ID</label>
+		<il2><input type="button" id="abc" name="ID" value="{{uid.uname}}"></il2>
+		<br><br>
+		<label>E-Mail</label>
+		<il3><input type="button" id="abc" name="mail" value="{{uid.eMail}}"></il3>
+		<br><br>
+		<label>Mobile Number</label>
+		<il4><input type="button" id="abc" name="phone" value="{{uid.mob}}"></il4>
+		<br><br>
+		<label>Position</label>
+		<il5><input type="button" id="abcd" name="dob" value="{{uid.position}}"></il5>
+		<!--<label>Date of Birth</label>
+		<il5><input type="button" id="abc" name="dob" value="{{uid.DOB}}"></il5>-->
+		<br>
+	</div>
+</body>
+</html>

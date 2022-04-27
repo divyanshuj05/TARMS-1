@@ -53,7 +53,7 @@ exports.faculty_sign=(req,res)=>{
         .save(faculty)
         .then(data=>{
             console.log("Data inserted"+data),
-            res.redirect('/faculty')})
+            res.redirect('/')})
         .catch(err=>{
             res.send(err)});
 }
@@ -123,7 +123,14 @@ exports.loginfaculty=async (req,res)=>{
             }
             else{
                 req.session.isAuth=true;
-                res.redirect("/faculty");
+                facultydb.findOne({"uname":user,"password":pass,"Member_type":mem2},{projection:{_id:1}})
+                .then(data=>{
+                    res.redirect(`/faculty?uid=${data._id}`);
+                })
+                .catch(err=>{
+                    console.log(err);
+                    res.send("Some error occured!!");
+                })
             }
         }
     });
@@ -136,11 +143,13 @@ exports.getFeedback=(req,res)=>{
         Rating:req.body.rate,
         Date:new Date()
     })
+    let uid=req.body.id;
+    console.log(uid)
     obj 
         .save(obj)
         .then(data=>{
             console.log("Data sent "+data)
-            res.redirect('/home/feedback')
+            res.redirect(`/home?uid=${uid}`)
         })
         .catch(err=>{
             res.send(err || "Some error occured");
@@ -155,23 +164,24 @@ exports.contact=(req,res)=>{
         Message:req.body.message,
         Date:new Date()
     })
-
+    let uid=req.body.id
     obj 
         .save(obj)
         .then(data=>{
             console.log("New message from contact us: "+data)
-            res.redirect('/home')
+            res.redirect(`/home?uid=${uid}`)
         })
         .catch(err=>{
             res.send(err || "Some error occured")
         })
 }
 
-//change password
+//change password student
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
     var newPass=req.body.newPassword;
 
+    let uid=req.body.id;
     await db.collection("users").updateOne({"Password":oldPass},{$set:{"Password":newPass}},(err,data)=>{
         if(err)
         {
@@ -182,7 +192,26 @@ exports.changePassword= async(req,res)=>{
         {
             res.send("Existing Password does not exist in database")
         }
-        else{res.redirect('/home')}
+        else{res.redirect(`/home?uid=${uid}`)}
+    });
+}
+
+//change password faculty
+exports.FacultyChangePassword=async(req,res)=>{
+    var oldPass=req.body.oldPassword;
+    var newPass=req.body.newPassword;
+    let uid=req.body.id;
+    await db.collection("faculties").updateOne({"password":oldPass},{$set:{"password":newPass}},(err,data)=>{
+        if(err)
+        {
+            console.log(err)
+            res.send(err || "Some error occureed during updation. Do the process again")
+        }
+        else if(data.matchedCount==0)
+        {
+            res.send("Existing Password does not exist in database")
+        }
+        else{res.redirect(`/faculty?uid=${uid}`)}
     });
 }
 
@@ -204,41 +233,41 @@ exports.insert2=(req,res)=>{
         AC:req.body.AC,
         SS:req.body.SS
     })
+    let uid=req.body.id;
+    let rid=req.body.Rid;
     booking_form
         .save(booking_form)
-        .then(data=>{
-            console.log("Data inserted"+data),
-            res.redirect('/home')})
+        .then(async function(data){
+            //console.log("Data inserted"+data),
+            await rooms.updateOne({"_id":rid},{$set:{"Status":"On Hold"}},function(err,coll)
+            {
+                if(err){
+                    console.log(err)
+                    res.send("Some error occured" || err);
+                }
+                else{
+                    res.redirect(`/home?uid=${uid}`)
+                }
+            }).clone()
+        })
         .catch(err=>{
             res.send(err)});
 }
 
-//get all booking requests
-exports.request=(req,res)=>{
-    Booking_form.find()
-    .then(user=>{
-        res.send(user)
-    })
-    .catch(err =>{
-        res.status(500).send({message:err.message||"Error occurred while retrieving user information"})
-    })
-}   
-
-//change basic details of user
+//change basic details of student
 exports.changeInfo=async (req,res)=>{
     var flag=0;
-    var currPhone=req.body.mobile;
+    var currPhone1=req.body.mobile;
     var currID=req.body.userID;
-    var currname=req.body.name1;
     var newPhone=req.body.mobile2;
     var newID=req.body.userID2;
-    var newname=req.body.name2;
-
+    var uid=req.body.id;
     if(currID==newID)
     {
         flag=1;
     }
-    const result1=await db.collection("users").findOne({"UserID":currID,"MobileNumber":currPhone,"Name":currname});
+    const currPhone=Number(currPhone1)
+    const result1=await db.collection("users").findOne({"UserID":currID,"MobileNumber":currPhone});
     const result=await db.collection("users").findOne({"UserID":newID});
     if(result1==null)
     {
@@ -252,7 +281,7 @@ exports.changeInfo=async (req,res)=>{
     }
     else
     {
-        await userDB.updateOne({"UserID":currID,"MobileNumber":currPhone,"Name":currname},{$set:{"UserID":newID,"MobileNumber":newPhone,"Name":newname}},function(error,data)
+        await userDB.updateOne({"UserID":currID,"MobileNumber":currPhone},{$set:{"UserID":newID,"MobileNumber":newPhone}},function(error,data)
         {
             if(error)
             {
@@ -263,7 +292,51 @@ exports.changeInfo=async (req,res)=>{
             else
             {
                 console.log("Data updated")
-                res.redirect("/home")
+                res.redirect(`/home?uid=${uid}`)
+            }
+        }).clone()
+    }
+}
+
+//change basic details of faculty
+exports.FacultyChangeInfo=async(req,res)=>{
+    var flag=0;
+    var currPhone1=req.body.mobile;
+    var currID=req.body.userID;
+    var newPhone=req.body.mobile2;
+    var newID=req.body.userID2;
+    var uid=req.body.id;
+    if(currID==newID)
+    {
+        flag=1;
+    }
+    const currPhone=Number(currPhone1)
+    const result1=await db.collection("faculties").findOne({"uname":currID,"mob":currPhone});
+    const result=await db.collection("faculties").findOne({"uname":newID});
+    if(result1==null)
+    {
+        res.send("Existing data does not exist in the database!!");
+        return;
+    }
+    else if(result!=null && flag==0)
+    {
+        res.send("User ID already taken")
+        return;
+    }
+    else
+    {
+        await facultydb.updateOne({"uname":currID,"mob":currPhone},{$set:{"uname":newID,"mob":newPhone}},function(error,data)
+        {
+            if(error)
+            {
+                console.log(error);
+                res.send(err||"Some error occured");
+                return;
+            }
+            else
+            {
+                console.log("Data updated")
+                res.redirect(`/faculty?uid=${uid}`)
             }
         }).clone()
     }
