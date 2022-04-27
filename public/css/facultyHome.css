@@ -1,0 +1,19 @@
+@import 'home.css';
+
+.decision{
+    padding: 7px;
+    text-decoration: none;
+    background-color: aliceblue;
+    font-size: 17px;
+}
+#accept:hover{
+    background-color: green;
+    color:white;
+    transition: 0.4s;
+}
+#reject:hover{
+    background-color: red;
+    color: white;
+    transition: 0.4s;
+    
+}

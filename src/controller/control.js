@@ -53,7 +53,7 @@ exports.faculty_sign=(req,res)=>{
         .save(faculty)
         .then(data=>{
             console.log("Data inserted"+data),
-            res.redirect('/faculty')})
+            res.redirect('/')})
         .catch(err=>{
             res.send(err)});
 }
@@ -123,7 +123,14 @@ exports.loginfaculty=async (req,res)=>{
             }
             else{
                 req.session.isAuth=true;
-                res.redirect("/faculty");
+                facultydb.findOne({"uname":user,"password":pass,"Member_type":mem2},{projection:{_id:1}})
+                .then(data=>{
+                    res.redirect(`/faculty?uid=${data._id}`);
+                })
+                .catch(err=>{
+                    console.log(err);
+                    res.send("Some error occured!!");
+                })
             }
         }
     });
@@ -169,7 +176,7 @@ exports.contact=(req,res)=>{
         })
 }
 
-//change password
+//change password student
 exports.changePassword= async(req,res)=>{
     var oldPass=req.body.oldPassword;
     var newPass=req.body.newPassword;
@@ -186,6 +193,25 @@ exports.changePassword= async(req,res)=>{
             res.send("Existing Password does not exist in database")
         }
         else{res.redirect(`/home?uid=${uid}`)}
+    });
+}
+
+//change password faculty
+exports.FacultyChangePassword=async(req,res)=>{
+    var oldPass=req.body.oldPassword;
+    var newPass=req.body.newPassword;
+    let uid=req.body.id;
+    await db.collection("faculties").updateOne({"password":oldPass},{$set:{"password":newPass}},(err,data)=>{
+        if(err)
+        {
+            console.log(err)
+            res.send(err || "Some error occureed during updation. Do the process again")
+        }
+        else if(data.matchedCount==0)
+        {
+            res.send("Existing Password does not exist in database")
+        }
+        else{res.redirect(`/faculty?uid=${uid}`)}
     });
 }
 
@@ -228,7 +254,7 @@ exports.insert2=(req,res)=>{
             res.send(err)});
 }
 
-//change basic details of user
+//change basic details of student
 exports.changeInfo=async (req,res)=>{
     var flag=0;
     var currPhone1=req.body.mobile;
@@ -267,6 +293,50 @@ exports.changeInfo=async (req,res)=>{
             {
                 console.log("Data updated")
                 res.redirect(`/home?uid=${uid}`)
+            }
+        }).clone()
+    }
+}
+
+//change basic details of faculty
+exports.FacultyChangeInfo=async(req,res)=>{
+    var flag=0;
+    var currPhone1=req.body.mobile;
+    var currID=req.body.userID;
+    var newPhone=req.body.mobile2;
+    var newID=req.body.userID2;
+    var uid=req.body.id;
+    if(currID==newID)
+    {
+        flag=1;
+    }
+    const currPhone=Number(currPhone1)
+    const result1=await db.collection("faculties").findOne({"uname":currID,"mob":currPhone});
+    const result=await db.collection("faculties").findOne({"uname":newID});
+    if(result1==null)
+    {
+        res.send("Existing data does not exist in the database!!");
+        return;
+    }
+    else if(result!=null && flag==0)
+    {
+        res.send("User ID already taken")
+        return;
+    }
+    else
+    {
+        await facultydb.updateOne({"uname":currID,"mob":currPhone},{$set:{"uname":newID,"mob":newPhone}},function(error,data)
+        {
+            if(error)
+            {
+                console.log(error);
+                res.send(err||"Some error occured");
+                return;
+            }
+            else
+            {
+                console.log("Data updated")
+                res.redirect(`/faculty?uid=${uid}`)
             }
         }).clone()
     }
