@@ -12,6 +12,7 @@ const res = require("express/lib/response");
 const { aggregate } = require("../models/user");
 const Booking_form = require("../models/booking_form");
 const facultydb=require("../models/faculty");
+const { default: mongoose } = require("mongoose");
 const routes=express.Router();
 
 //some functions
@@ -231,29 +232,36 @@ routes.get("/faculty/personalDetails",Auth,(req,res)=>{
 }) */
 
 //show room details faculty
-routes.get("/faculty/showdetail",Auth,(req,res)=>{
-    rooms.find({"Room_Name":""})
-    
-    Booking_form.aggregate([{
-        $lookup: {
-            from: "rooms", // collection to join
-            localField: "Room_Name",//field from the input documents
-            foreignField: "Room_Name",//field from the documents of the "from" collection
-            as: "Room_Name"// output array field
-        }}])
-        .then(data=>{
-            console.log(data.Room_Name)
-        })
-        .catch(err=>{
+routes.get("/faculty/showdetail",Auth,async(req,res)=>{
+    var detail="hello"
+    await Booking_form.aggregate([
+        {
+            $match:{
+                "Room_Name":req.query.id
+            }
+        }
+    ])
+    .then(data=>{
+        detail=data
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    var userName='hello';
+    async function getName(){
+        let user=detail2(req.query.uid);
+        user.then(data=>{
+            userName=data.fac_name;
+        }).catch(err=>{
             console.log(err)
+            res.send("Some error occured");
         })
-        //console.log(bk1)
-    const Ruid=req.query.id;
-    //let Rooms=detail(RUid);
-    //aggregate.lookup({from:'booking_Form',localField:'Room_Name',foreignField:'Room_Name',as:'joinRoom'});
-    Rooms.then(function(data)
+    }
+    await getName()
+    await rooms.findOne({"Room_Name":req.query.id})
+    .then(function(data)
     {
-        res.render("showdetail",{rooms:data});
+        res.render("showdetail",{rooms:data,BookingDetail:detail,uid:req.query.uid,name:userName});
     }).catch(err=>{
         console.log(err)
         res.send("Some error occured")

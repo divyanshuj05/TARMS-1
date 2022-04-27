@@ -107,11 +107,11 @@ label7{
 }
 il1{
 	float: right;
-	margin-right: 200px;
+	margin-right: 300px;
 }
 il2{
 	float: left;
-	margin-left: 68px;
+	margin-left: 109px;
 }
 il3{
 	float: left;
@@ -127,7 +127,7 @@ il5{
 }
 il6{
 	float: left;
-	margin-left: 77px;
+	margin-right: 1px;
 }
 il7{
 	float: left;
@@ -152,6 +152,11 @@ il11{
 il12{
 	float: left;
 	margin-left: 75px;	
+	display: inline-block;
+}
+il13{
+	float: left;
+	margin-left: 46px;	
 	display: inline-block;
 }
 input[type="reset"], [type="submit"]{

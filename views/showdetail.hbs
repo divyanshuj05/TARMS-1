@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Booking Form</title>
-	<link rel="stylesheet" href="/css/requestForm.css">
+	<link rel="stylesheet" href="/css/showDetail.css">
 </head> 
 <body>
 <style>
@@ -15,69 +15,78 @@
 	 }
 	</style>
 	<div class="support">
-		<p>Welcome User</p>
-		<a href="/home/contact" class="link1">Contact Us</a>
-		<a href="/home/feedback" class="link1">Feedback</a>
-		<br>
+		<p>Welcome {{name}}</p>
+		<!--<a href="/home/contact" class="link1">Contact Us</a>
+		<a href="/home/feedback" class="link1">Feedback</a>-->
+		
 		<!--<a href="#" class="link2">Sign Out</a>-->
-		<a href="/home" class="link1">Back to Booking Page</a>
+		<a href="/faculty?uid={{uid}}" class="link1">Back to Booking Page</a>
 	</div>
 	<div class="promote">
 		<h2><b>Thapar ARMS<br>Auditorium and Room Management System</b></h2>
 		<a href="/home/logout">Log<br>Out</a>
-		<a href="/home/ChangePassword">Change<br>Password</a>
-		<a href="">My<br>Requests</a>
-		<a href="/home/changeInfo">Edit<br>Info</a>
-		<a href="/home/personalDetails">Personal<br>Info</a>
+		<a href="/faculty/ChangePassword?uid={{uid}}">Change<br>Password</a>
+		<!--<a href="">My<br>Requests</a>-->
+		<a href="/faculty/changeInfo?uid={{uid}}">Edit<br>Info</a>
+		<a href="/faculty/personalDetails?uid={{uid}}">Personal<br>Info</a>
 		<br><br>
 	</div>
 	<div class="requestForm">
-		<h1><b>Showing Details for {{roomNo.Room_Name}}</b></h1>
+		{{#each BookingDetail}}
+		<h1><b>Showing Details for {{Room_Name}}</b></h1>
 		<br>
 		<form id="ReqBook" name="form" id="book_form"> 
-			<input type="hidden" name="roomName" value="{{roomNo.Room_Name}}" id="roomName"/>
+			<!--<input type="hidden" name="roomName" value="{{roomNo.Room_Name}}" id="roomName"/>-->
 			<label>Name</label>
-			<il1><input type="text" id="getName" name="Name" value="{{rooms.Name}}"></il1>
+			<il1><input type="button" id="getName" name="Name" value="{{Name}}"></il1>
 			<br><br>
-			<label1 for="branch">Select Branch</label1>
-			<il2><input type="text" id="branch" name="branch" value="{{rooms.branch}}"></il2>
-			<label2 for="year">Select Year</label2>
-			<il3><input type="text" id="year" name="year" value="{{rooms.year}}"></il3>
+			<label1 for="branch">Branch</label1>
+			<il2><input type="button" id="branch" name="branch" value="{{branch}}"></il2>
+			&nbsp;<label2 for="year">Year</label2>
+			<il3><input type="button" id="year" name="year" value="{{year}}"></il3>
 			<br><br>
 			<label>Mobile Number</label>
-			<il4><input type="number" id="getMobile" name="mobile" value="{{rooms.MobileNumber}}"></il4>
+			<il4><input type="button" id="getMobile" name="mobile" value="{{MobileNumber}}"></il4>
 			<br><br>
 			<label for="society">Society</label>
-			<il5><input type="text" id="society" name="society" value="{{rooms.society}}"></il5>
+			<il5><input type="button" id="society" name="society" value="{{society}}"></il5>
 			<br><br>
 			<label>Event Name</label>
-			<il6><input type="text" id="getEvent" name="event" value="{{rooms.eventNames}}"</il6>
+			<il6><input type="button" id="getEvent" name="event" value="{{eventNames}}"</il6>
 			<br><br>
 			<label>Purpose</label>
-			<il7><input type="text" id="getPurpose" name="purpose" value="{{rooms.purpose}}"></il7>
+			<il7><input type="button" id="getPurpose" name="purpose" value="{{purpose}}"></il7>
 			<br><br>
-			<label for id="eventDate">Date Of Event</label>
-			<il8><input type="date" id="eventDate" name="eventDate" value="{{rooms.eventDate}}"></il8>
+			<label>Date Of Event</label>
+			<il8><input type="button" id="eventDate" name="eventDate" value="{{eventDate}}"></il8>
 			<br><br>
+			
 			<label5 for id="eventTime">Event Time</label5>
-			<il9><input type="time" id="eventTime" name="eventTime" value="{{rooms.eventTime}}"></il9>
+			<il9><input type="time" id="eventTime" name="eventTime" value="{{eventTime}}"></il9>
 			<label3> to </label3>
-			<il10><input type="time" id="eventTime1" name="eventTime1" value="{{rooms.eventTime1}}"></il10>
+			<il10><input type="time" id="eventTime1" name="eventTime1" value="{{eventTime1}}"></il10>
 			<br><br>
 			<label4 for="people">Total Strength<br>(Approx.)</label4>
-			<il11><input type="number" id="people" name="people" value="{{rooms.people}}"></il11>
+			<il11><input type="button" id="people" name="people" value="{{people}}"></il11>
 			<br><br><br>
 			<label6><strong>Additional Facilities:</strong></label6>
 			<br><br>
-			<il12><input type="radio" id="yesAC" name="AC" value="{{rooms.AC}}"></il12>
-			<label7 for="yesAC">Yes</label7>
+			<label>AC required:</label>
+			<il12><input type="button" id="yesAC" name="AC" value="{{AC}}"></il12>
+			<!--<label7 for="yesAC">Yes</label7>-->
 			<br><br>
-			<il12><input type="radio" id="yesSS" name="SS" value="{{rooms.SS}}"></il12>
-			<label7 for="yesSS">Yes</label7>
+			<label>Speaker required:</label>
+			<il13><input type="button" id="yesSS" name="SS" value="{{SS}}"></il13>
+			<!--<label7 for="yesSS">Yes</label7>-->
 			<br><br><br>
+			{{/each}}
 		</form>
-		
 	</div>
+	<script>
+		let birth=document.getElementById('eventDate');
+		let today=birth.value.slice(0,15)
+		birth.value=today
+	</script>
 	<script src="/js/requestForm.js"></script>
 </body>
 </html>
