@@ -32,54 +32,59 @@
 		<br><br>
 	</div>
 	<div class="requestForm">
-		{{#each BookingDetail}}
 		<h1><b>Showing Details for {{Room_Name}}</b></h1>
 		<br>
 		<form id="ReqBook" name="form" id="book_form"> 
 			<!--<input type="hidden" name="roomName" value="{{roomNo.Room_Name}}" id="roomName"/>-->
 			<label>Name</label>
-			<il1><input type="button" id="getName" name="Name" value="{{Name}}"></il1>
+			<il1><input type="button" id="getName" name="Name" value="{{BookingDetail.Name}}"></il1>
 			<br><br>
 			<label1 for="branch">Branch</label1>
-			<il2><input type="button" id="branch" name="branch" value="{{branch}}"></il2>
+			<il2><input type="button" id="branch" name="branch" value="{{BookingDetail.branch}}"></il2>
 			&nbsp;<label2 for="year">Year</label2>
-			<il3><input type="button" id="year" name="year" value="{{year}}"></il3>
+			<il3><input type="button" id="year" name="year" value="{{BookingDetail.year}}"></il3>
 			<br><br>
 			<label>Mobile Number</label>
-			<il4><input type="button" id="getMobile" name="mobile" value="{{MobileNumber}}"></il4>
+			<il4><input type="button" id="getMobile" name="mobile" value="{{BookingDetail.MobileNumber}}"></il4>
 			<br><br>
 			<label for="society">Society</label>
-			<il5><input type="button" id="society" name="society" value="{{society}}"></il5>
+			<il5><input type="button" id="society" name="society" value="{{BookingDetail.society}}"></il5>
 			<br><br>
 			<label>Event Name</label>
-			<il6><input type="button" id="getEvent" name="event" value="{{eventNames}}"</il6>
+			<il6><input type="button" id="getEvent" name="event" value="{{BookingDetail.eventNames}}"</il6>
 			<br><br>
 			<label>Purpose</label>
-			<il7><input type="button" id="getPurpose" name="purpose" value="{{purpose}}"></il7>
+			<il7><input type="button" id="getPurpose" name="purpose" value="{{BookingDetail.purpose}}"></il7>
 			<br><br>
 			<label>Date Of Event</label>
-			<il8><input type="button" id="eventDate" name="eventDate" value="{{eventDate}}"></il8>
+			<il8><input type="button" id="eventDate" name="eventDate" value="{{BookingDetail.eventDate}}"></il8>
 			<br><br>
 			
 			<label5 for id="eventTime">Event Time</label5>
+<<<<<<< HEAD
 			<il9><input type="button" id="eventTime" name="eventTime" value="{{eventTime}}"></il9>
 			<label3> to </label3>
 			<il10><input type="button" id="eventTime1" name="eventTime1" value="{{eventTime1}}"></il10>
+=======
+			<il9><input type="time" id="eventTime" name="eventTime" value="{{BookingDetail.eventTime}}"></il9>
+			<label3> to </label3>
+			<il10><input type="time" id="eventTime1" name="eventTime1" value="{{BookingDetail.eventTime1}}"></il10>
+>>>>>>> 1e68c1a36a27e8be44cc8ebe3b5afbafca75c59a
 			<br><br>
 			<label4 for="people">Total Strength<br>(Approx.)</label4>
-			<il11><input type="button" id="people" name="people" value="{{people}}"></il11>
+			<il11><input type="button" id="people" name="people" value="{{BookingDetail.people}}"></il11>
 			<br><br><br>
 			<label6><strong>Additional Facilities:</strong></label6>
 			<br><br>
 			<label>AC required:</label>
-			<il12><input type="button" id="yesAC" name="AC" value="{{AC}}"></il12>
+			<il12><input type="button" id="yesAC" name="AC" value="{{BookingDetail.AC}}"></il12>
 			<!--<label7 for="yesAC">Yes</label7>-->
 			<br><br>
 			<label>Speaker required:</label>
-			<il13><input type="button" id="yesSS" name="SS" value="{{SS}}"></il13>
+			<il13><input type="button" id="yesSS" name="SS" value="{{BookingDetail.SS}}"></il13>
 			<!--<label7 for="yesSS">Yes</label7>-->
 			<br><br><br>
-			{{/each}}
+			
 		</form>
 	</div>
 	<script>

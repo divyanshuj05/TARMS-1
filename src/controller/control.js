@@ -231,7 +231,8 @@ exports.insert2=(req,res)=>{
         eventTime1:req.body.eventTime1,
         people:req.body.people,
         AC:req.body.AC,
-        SS:req.body.SS
+        SS:req.body.SS,
+        Status:req.body.status
     })
     let uid=req.body.id;
     let rid=req.body.Rid;
@@ -339,5 +340,40 @@ exports.FacultyChangeInfo=async(req,res)=>{
                 res.redirect(`/faculty?uid=${uid}`)
             }
         }).clone()
+    }
+}
+
+//accepting rejecting room request
+exports.RoomResponse=(req,res)=>{
+    var result=req.body.Decision;
+    var room=req.body.roomName;
+    var uid=req.body.uid;
+    Booking_form.updateOne({"Room_Name":room,"Status":"Requested"},{$set:{"Status":result}})
+    .then(data=>{
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
+    if(result=="Accept")
+    {
+        rooms.updateOne({"Room_Name":room},{$set:{"Status":"Booked"}})
+        .then(data=>{
+            res.redirect(`/faculty?uid=${uid}`)
+        })
+        .catch(err=>{
+            console.log(err)
+            res.send("Some error occured")
+        })
+    }
+    else{
+        rooms.updateOne({"Room_Name":room},{$set:{"Status":"Available"}})
+        .then(data=>{
+            res.redirect(`/faculty?uid=${uid}`)
+        })
+        .catch(err=>{
+            console.log(err)
+            res.send("Some error occured")
+        })
     }
 }
