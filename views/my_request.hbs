@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+	<style>
+	body
+	{
+		background-image: url("https://th.bing.com/th/id/Rc7f8f0025f585bbf8abebfeae1a50cfe?rik=PVQ2choBn6BRQA&riu=http%3a%2f%2fimg.collegepravesh.com%2f2014%2f12%2fThapar-University.jpg&ehk=CCOy468fwERBONZm5Dhv%2fG8BdT6U5ansGCbgjFc4dEQ%3d&risl=&pid=ImgRaw");
+		background-repeat:no-repeat;
+		background-attachment: fixed;
+  		background-size: cover;
+	}
+	</style>
+	
+	<div class="support">
+		<p>Welcome {{name}}</p>
+		<a href="/home/contact?uid={{uid}}" class="link1">Contact Us</a>
+		<a href="/home/feedback?uid={{uid}}" class="link1">Feedback</a>
+		<br>
+		<!--<a href="#" class="link2">Sign Out</a>-->
+	</div>
+	<div class="promote">
+		<h1><b>Thapar ARMS<br>Auditorium and Room Management System</b></h1>
+		<a href="/home/logout">Log<br>Out</a>
+		<a href="/home/ChangePassword?uid={{uid}}">Change Password</a>
+		<a href="/home/changeInfo?uid={{uid}}">Edit<br>Info</a>
+		<a href="/home/personalDetails?uid={{uid}}">Personal<br>Info</a>
+		<br>
+	</div>
+	<br><hr>
+	<div id="booking">
+		<label>Select Date: <input type="date" id="myDate"></label>
+		<a class="fill" href="">Search</a>
+		<br>
+		<table>
+			<tr>
+				<th>User Name</th>
+                <th>Event Name</th>
+				<th>Room Name</th>
+				<th>Response</th>
+			</tr>
+
+
+			<tr>
+				<td>{{BookingDetail.Name}}</td>
+                <td>{{BookingDetail.eventNames}}</td>
+				<td>{{BookingDetail.Room_Name}}</td>
+				<td>{{BookingDetail.Status}}</td>
+			</tr>
+
+		</table>
+	</div>
+	<script src="/js/home.js"></script>
+</body>
+</html>

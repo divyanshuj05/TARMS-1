@@ -251,8 +251,34 @@ routes.get("/faculty/showdetail",Auth,async(req,res)=>{
 })
 
 //my request student
-routes.get("/home/my_request",Auth,(req,res)=>{
-    res.render("my_request");
+routes.get("/home/my_request",Auth,async(req,res)=>{
+    var detail="hello"
+    await Booking_form.findOne({"userid":req.query.id})
+    .then(data=>{
+        detail=data
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    var userName='hello';
+    async function getName(){
+        let user=detail(req.query.uid);
+        user.then(data=>{
+            userName=data.Name;
+        }).catch(err=>{
+            console.log(err)
+            res.send("Some error occured");
+        })
+    }
+    await getName()
+    await user.findOne({"UserID":req.query.id})
+    .then(function(data)
+    {
+        res.render("my_request",{user:data,BookingDetail:detail,uid:req.query.uid,name:userName});
+    }).catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
 })
 
 //request form student

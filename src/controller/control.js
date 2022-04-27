@@ -219,6 +219,7 @@ exports.FacultyChangePassword=async(req,res)=>{
 exports.insert2=(req,res)=>{
     const booking_form=new Booking_form({
         Room_Name:req.body.roomName,
+        userid:req.body.userID,
         Name:req.body.Name,
         branch:req.body.branch,
         year:req.body.year,
