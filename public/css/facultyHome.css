@@ -10,10 +10,11 @@
     background-color: green;
     color:white;
     transition: 0.4s;
+    cursor:pointer;
 }
 #reject:hover{
     background-color: red;
     color: white;
     transition: 0.4s;
-    
+    cursor:pointer;
 }

@@ -43,14 +43,19 @@
 			<tr>
 				<td>{{Room_Number}}</td>
 				<td>{{Room_Name}}</td>
-				<td><a href="/faculty/showdetail?id={{Room_Name}}&uid={{../uid}}" id="{{Room_Number}}" onmousedown=validate()>Show info</a></td>
-				<td><input type="button" class="decision" id="accept" value="Accept">
-				<input type="button" class="decision" id="reject" value="Reject">
+				<td><a href="/faculty/showdetail?id={{Room_Name}}&uid={{../uid}}" id="{{Room_Number}}">Show info</a></td>
+				<form action="/api/response" method="post" name="decisionForm">
+				<input type="hidden" id="{{Room_Name}}" value="None">
+				<input type="hidden" name="roomName" value="{{Room_Name}}">
+				<input type="hidden" name="uid" value="{{../uid}}">
+				<td><input type="submit" class="decision" id="accept" value="Accept" name="Decision" onmousedown=acceptRequest({{Room_Name}})>
+				<input type="submit" class="decision" id="reject" value="Reject" name="Decision" onmousedown=rejectRequest({{Room_Name}})>
+				</form>
 				</td>
 			</tr>
 {{/each}}
 		</table>
 	</div>
-	<!--<script src="/js/home.js"></script>-->
+	<script src="/js/facultyHome.js"></script>
 </body>
 </html>

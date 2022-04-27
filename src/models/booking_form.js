@@ -14,8 +14,8 @@ var schema=new mongoose.Schema({
     eventTime1:String,
     people:Number,
     AC:String,
-    SS:String
-
+    SS:String,
+    Status:String
 },{
     timestamps:true
 })

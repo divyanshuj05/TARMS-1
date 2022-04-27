@@ -218,29 +218,10 @@ routes.get("/faculty/personalDetails",Auth,(req,res)=>{
     })
 })
 
-/* Booking_form.aggregate({
-    $lookup: {
-        from: "rooms", // collection to join
-        localField: "Room_Name",//field from the input documents
-        foreignField: "Room_Name",//field from the documents of the "from" collection
-        as: "Room_Name"// output array field
-    }
-
-},function (error, data) {
-    console.log(data);
-  return res.send(data);
-}) */
-
 //show room details faculty
 routes.get("/faculty/showdetail",Auth,async(req,res)=>{
     var detail="hello"
-    await Booking_form.aggregate([
-        {
-            $match:{
-                "Room_Name":req.query.id
-            }
-        }
-    ])
+    await Booking_form.findOne({"Room_Name":req.query.id,"Status":"Requested"})
     .then(data=>{
         detail=data
     })
@@ -299,6 +280,7 @@ routes.get("/home/RequestForm",Auth,async(req,res)=>{
     })    
 })
 
+routes.post("/api/response",controller.RoomResponse);
 routes.post("/api/signIn",controller.insert);
 routes.post("/api/reset",controller.reset);
 routes.post("/api/login",controller.login);
