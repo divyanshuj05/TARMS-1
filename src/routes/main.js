@@ -252,29 +252,28 @@ routes.get("/faculty/showdetail",Auth,async(req,res)=>{
 
 //my request student
 routes.get("/home/my_request",Auth,async(req,res)=>{
-    var detail="hello"
-    await Booking_form.findOne({"userid":req.query.id})
-    .then(data=>{
-        detail=data
+    var name='hello';
+    var form='myform';
+    let userName=detail(req.query.uid)
+    await userName.then(data=>{
+        name=data.Name
     })
     .catch(err=>{
         console.log(err)
+        res.send("Some error occured");
     })
-    var userName='hello';
-    async function getName(){
-        let user=detail(req.query.uid);
-        user.then(data=>{
-            userName=data.Name;
-        }).catch(err=>{
-            console.log(err)
-            res.send("Some error occured");
-        })
-    }
-    await getName()
-    await user.findOne({"UserID":req.query.id})
-    .then(function(data)
+    await Booking_form.find({"Name":name})
+    .then(data=>{
+        form=data
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
+    await user.findById(req.query.uid)
+    .then(data=>
     {
-        res.render("my_request",{user:data,BookingDetail:detail,uid:req.query.uid,name:userName});
+        res.render("my_request",{user:data,uid:req.query.uid,form:form});
     }).catch(err=>{
         console.log(err)
         res.send("Some error occured")

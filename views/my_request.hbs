@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home Page</title>
+	<title>My Requests</title>
 	<link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
@@ -16,24 +16,24 @@
 	</style>
 	
 	<div class="support">
-		<p>Welcome {{name}}</p>
-		<a href="/home/contact?uid={{uid}}" class="link1">Contact Us</a>
-		<a href="/home/feedback?uid={{uid}}" class="link1">Feedback</a>
+		<p>Welcome {{user.Name}}</p>
+		<a href="/home/contact?uid={{user._id}}" class="link1">Contact Us</a>
+		<a href="/home/feedback?uid={{user._id}}" class="link1">Feedback</a>
 		<br>
 		<!--<a href="#" class="link2">Sign Out</a>-->
 	</div>
 	<div class="promote">
 		<h1><b>Thapar ARMS<br>Auditorium and Room Management System</b></h1>
 		<a href="/home/logout">Log<br>Out</a>
-		<a href="/home/ChangePassword?uid={{uid}}">Change Password</a>
-		<a href="/home/changeInfo?uid={{uid}}">Edit<br>Info</a>
-		<a href="/home/personalDetails?uid={{uid}}">Personal<br>Info</a>
+		<a href="/home/ChangePassword?uid={{user._id}}">Change Password</a>
+		<a href="/home/changeInfo?uid={{user._id}}">Edit<br>Info</a>
+		<a href="/home/personalDetails?uid={{user._id}}">Personal<br>Info</a>
 		<br>
 	</div>
 	<br><hr>
 	<div id="booking">
-		<label>Select Date: <input type="date" id="myDate"></label>
-		<a class="fill" href="">Search</a>
+		<!--<label>Select Date: <input type="date" id="myDate"></label>
+		<a class="fill" href="">Search</a>-->
 		<br>
 		<table>
 			<tr>
@@ -42,17 +42,16 @@
 				<th>Room Name</th>
 				<th>Response</th>
 			</tr>
-
-
+			{{#each form}}
 			<tr>
-				<td>{{BookingDetail.Name}}</td>
-                <td>{{BookingDetail.eventNames}}</td>
-				<td>{{BookingDetail.Room_Name}}</td>
-				<td>{{BookingDetail.Status}}</td>
+				<td>{{Name}}</td>
+                <td>{{eventNames}}</td>
+				<td>{{Room_Name}}</td>
+				<td>{{Status}}</td>
 			</tr>
-
+			{{/each}}
 		</table>
 	</div>
-	<script src="/js/home.js"></script>
+	<!--<script src="/js/home.js"></script>-->
 </body>
 </html>
