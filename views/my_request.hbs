@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>My Requests</title>
-	<link rel="stylesheet" href="/css/home.css">
+	<link rel="stylesheet" href="/css/myRequest.css">
 </head>
 <body>
 	<style>
@@ -21,6 +21,7 @@
 		<a href="/home/feedback?uid={{user._id}}" class="link1">Feedback</a>
 		<br>
 		<!--<a href="#" class="link2">Sign Out</a>-->
+		<a href="/home?uid={{user._id}}" class="link1">Back to Booking Page</a>
 	</div>
 	<div class="promote">
 		<h1><b>Thapar ARMS<br>Auditorium and Room Management System</b></h1>
@@ -41,6 +42,7 @@
                 <th>Event Name</th>
 				<th>Room Name</th>
 				<th>Response</th>
+				<th>Options</th>
 			</tr>
 			{{#each form}}
 			<tr>
@@ -48,6 +50,20 @@
                 <td>{{eventNames}}</td>
 				<td>{{Room_Name}}</td>
 				<td>{{Status}}</td>
+				<form action="/api/deleteRequest" method="post">
+				<input type="hidden" name="id" value="{{../user._id}}">
+				<input type="hidden" name="roomName" value="{{Room_Name}}">
+				<td><input type="submit" class="cancel" id="{{_id}}" value="Withdraw request"></td>
+				</form>
+				<script>
+					if("{{Status}}"!="Requested")
+					{
+						let x=document.getElementById("{{_id}}")
+						x.style.pointerEvents="none";
+						x.style.backgroundColor="rgb(200,200,200)";
+						x.style.color="black";
+					}
+				</script>
 			</tr>
 			{{/each}}
 		</table>

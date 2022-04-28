@@ -318,5 +318,6 @@ routes.post("/api/FacultyChangePassword",controller.FacultyChangePassword)
 routes.post('/api/changeInfo',controller.changeInfo);
 routes.post("/api/FacultyChangeInfo",controller.FacultyChangeInfo)
 routes.post("/api/book_form",controller.insert2);
+routes.post("/api/deleteRequest",controller.deleteRequest);
 
 module.exports=routes;

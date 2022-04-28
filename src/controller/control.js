@@ -378,3 +378,24 @@ exports.RoomResponse=(req,res)=>{
         })
     }
 }
+
+//delete booking request if user wants
+exports.deleteRequest=async(req,res)=>{
+    uid=req.body.id;
+    let room=req.body.roomName
+    await Booking_form.deleteOne({"Room_Name":room,"Status":"Requested"})
+    .then(data=>{
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
+    await rooms.updateOne({"Room_Name":room},{$set:{"Status":"Available"}})
+    .then(data=>{
+        res.redirect(`/home/my_request?uid=${uid}`)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send("Some error occured")
+    })
+}
