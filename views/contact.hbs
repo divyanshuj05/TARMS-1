@@ -14,7 +14,7 @@
             </div>
             <div class="promote">
                 <h2><b>Thapar ARMS<br>Auditorium and Room Management System</b></h2>
-                <a class="a" href="/home/logout">Log<br>Out</a>
+                <a class="a" href="/home/logout" target="_blank">Log<br>Out</a>
                 <a class="a" href="/home/ChangePassword?uid={{uid._id}}">Change<br>Password</a>
                 <a class="a" href="/home/my_request?uid={{uid._id}}">My<br>Requests</a>
                 <a class="a" href="/home/changeInfo?uid={{uid._id}}">Edit<br>Info</a>
@@ -24,7 +24,7 @@
             </div>
         <div class="reach">
             <h1>Send your message</h1><br><br>
-            <form name="form" action="/api/contact" method="post">
+            <form name="form" action="/api/contact" method="post" onsubmit="return validate();">
                 <label for="name">Name</label><br>
                 <input type="text" id="Name" name="name" placeholder="Input name" value="{{uid.Name}}"><br><br>
                 <label for="mail">E-Mail</label><br>
@@ -33,7 +33,7 @@
                 <input type="text" id="mess" name="message" maxlength=300 placeholder="Write your message (in 300 words)"><br><br><br>
                 <input type="hidden" name="id" value="{{uid._id}}">
                 <input type="reset">
-                <input type="submit" onmousedown=validate()>
+                <input type="submit">
             </form>
         </div>
         <script src="/js/contact.js"></script>

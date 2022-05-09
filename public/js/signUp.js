@@ -14,10 +14,10 @@ function validate()
     }
 
     let str=document.forms["form"]["pass"].value;
-    if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*!]/g)  && str.length >= 8)
+    if(str.match(/[a-z]/g) && str.match(/[A-Z]/g) && str.match(/[0-9]/g) && str.match(/[@#$&^*!]/g)  && str.length >= 8 && str.length<=16)
     {}
     else{
-        alert("Wrong password entered!!\nPassword should contain: Number,Upper-Case,Lower-Case,Special Character");
+        alert("Wrong password entered!!\nPassword should contain: Number,Upper-Case,Lower-Case,Special Character and length should be between 8-16 characters");
         return false;
     }
 }
@@ -41,7 +41,7 @@ function common()
         alert("Name feild empty!!")
         return false;
     }
-    if(isNaN(x)==false)
+    if(x.match(/[0-9]/g))
     {
         alert("Does names conatin a number?")
         return false;

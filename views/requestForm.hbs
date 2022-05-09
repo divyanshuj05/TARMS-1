@@ -24,7 +24,7 @@
 	</div>
 	<div class="promote">
 		<h2><b>Thapar ARMS<br>Auditorium and Room Management System</b></h2>
-		<a href="/home/logout">Log<br>Out</a>
+		<a href="/home/logout" target="_blank">Log<br>Out</a>
 		<a href="/home/ChangePassword?uid={{user._id}}">Change<br>Password</a>
 		<a href="">My<br>Requests</a>
 		<a href="/home/changeInfo?uid={{user._id}}">Edit<br>Info</a>
@@ -34,7 +34,7 @@
 	<div class="requestForm">
 		<h1><b>Booking Request for {{roomNo.Room_Name}}</b></h1>
 		<br>
-		<form id="ReqBook" name="form" action="/api/book_form" method="POST" id="book_form"> 
+		<form id="ReqBook" name="form" action="/api/book_form" method="POST" id="book_form" onsubmit="return validate();"> 
 			<input type="hidden" name="roomName" value="{{roomNo.Room_Name}}" id="roomName"/>
 			<label>Name</label>
 			<il1><input type="text" id="getName" name="Name" placeholder="Enter Name" value="{{user.Name}}"></il1>
@@ -103,7 +103,7 @@
 			<input type="hidden" name="status" value="Requested">
 			<br><br><br>
 			<R1><input type="reset" value="Reset"></R1>
-			<input type=submit style="margin-left: 150px;" onmousedown="validate()">
+			<input type=submit style="margin-left: 150px;">
 			<input type="hidden" name="id" value="{{user._id}}">
 			<input type="hidden" name="Rid" value="{{roomNo._id}}">
 		</form>

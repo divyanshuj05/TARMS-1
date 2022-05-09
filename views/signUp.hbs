@@ -17,7 +17,7 @@
 	<div class="SignUp">
 		<h1>Thapar ARMS</h1>
 		<h2>Sign-Up</h2>
-		<form id="Sup" name="form" action="/api/signIn" method="POST" id="signin"> 
+		<form id="Sup" name="form" action="/api/signIn" method="POST" id="signin" onsubmit="return validate();"> 
 			<label for="Name"><b>Enter Name</b></label>
 			<input type="text" id="Name" name="Name" placeholder="Name">
 			<br><br>
@@ -37,7 +37,7 @@
 			<label for="pass"><b>Enter Password (Use mixture of upper case, lower case and numbers of length 8)</b></label>
 			<input type="password" id="pass" name="pass" placeholder="Password">
 			<br><br><br>
-			<input type="submit" id="button1" onmousedown="validate()" value="Sign-Up"></input>
+			<input type="submit" id="button1" value="Sign-Up"></input>
 			<br><br><br>	<br><br><br>
 			<label1><b>New faculty</label1>
 			<br>

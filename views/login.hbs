@@ -15,7 +15,7 @@
 	<div class="login"> 
 	<h2>Login</h2><br>
 	<h3>Thapar ARMS<br>(Auditorium and Room Management System)</h3>
-	<form id="login" name="myForm" action="/api/login" method="post">  
+	<form id="login" name="myForm" action="/api/login" method="post" onsubmit="return validateForm();">  
 		<label><b> User Name</b></label>
 		<input type="text" id="User" name="User" placeholder="Enter username">
 		<br><br>
@@ -45,7 +45,7 @@
 		<input type="radio" id="mem_type2" name="mem1" value="faculty">
 		<label for="mem_type2">Faculty</label><br> --}}
 		<br><br>
-		<button id="lin" onmousedown="validateForm()">Login</button>
+		<button id="lin">Login</button>
 		<br><br>
 		</form>
 		<input type="checkbox" id="check">

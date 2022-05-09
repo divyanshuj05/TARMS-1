@@ -26,7 +26,7 @@ exports.insert=(req,res)=>{
         eMail:req.body.mail,
         MobileNumber:req.body.phone,
         Member_type:req.body.mem_type,
-        DOB:today,
+        DOB:req.body.dob,
         Password:req.body.pass
     })
     user

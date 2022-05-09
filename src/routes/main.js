@@ -29,8 +29,9 @@ Auth=(req,res,next)=>{
         next();
     }
     else{
-        res.send("Login first @ http://localhost:3000/");
-        //res.render('login')
+        res.statusCode = 302;
+        res.setHeader("Location", "http://localhost:3000/");
+        res.end();
     }
 }
 

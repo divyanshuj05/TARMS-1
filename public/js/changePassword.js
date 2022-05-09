@@ -13,10 +13,10 @@ function validate()
         alert("New password not entered!!")
         return false;
     }
-    if(y.match(/[a-z]/g) && y.match(/[A-Z]/g) && y.match(/[0-9]/g)  && y.length >= 8)
+    if(y.match(/[a-z]/g) && y.match(/[A-Z]/g) && y.match(/[0-9]/g)  && y.length >= 8 && y.length<=16 && y.match(/[@#$&^*!]/g))
     {}
     else{
-        alert("Wrong password entered!!(UpperCase, LowerCase, Number and length 8");
+        alert("Wrong password entered!!\nUpperCase, LowerCase, Number, Special Character and length 8-16");
         return false;
     }
 

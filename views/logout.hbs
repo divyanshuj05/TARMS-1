@@ -4,11 +4,16 @@
         <title>Thanks for visiting</title>
         <link rel="stylesheet" href="/css/logout.css">
     </head>
-    <style>
-  
-    </style>
     <body>
         <h1>You have been successfully loged out of the website.<br>You can <a href="/">Login</a> 
         again to continue <br>Thanks for visiting!!</h1>
     </body>
+    <script>
+        function disableBack()
+        {
+            window.history.forward();
+        }
+        setTimeout("disableBack()",0);
+        window.onunload=function(){null};
+    </script>
 </html>
