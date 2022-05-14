@@ -122,9 +122,10 @@ td a:hover{
 	transition: 0.4s;
 }
 label{
-	margin-left: 300px;
-	font-size: 17px;
-	margin-top: 20px;
+	margin-left: 400px;
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 25px;
 	position: absolute;
 }
 .fill{

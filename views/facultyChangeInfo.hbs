@@ -38,7 +38,7 @@
 		<new>New Info</b></new>
 		<br><br><br>
 		<label>Current Mobile</label>	
-		<form action="/api/FacultyChangeInfo" method="post">
+		<form action="/api/FacultyChangeInfo" method="post" onsubmit="return validate();">
 		<inputLabel><input type="number" id="curr_mob" name="mobile" placeholder="Current Mobile Number" value="{{uid.mob}}"></inputLabel>
 		<inputLabel1><input type="number" id="new_mob" name="mobile2" placeholder="New Mobile Number"></inputLabel1>
 		<label3>New Mobile</label3>
@@ -55,7 +55,7 @@
 		<br><br>--><br><br>
 		<input type="hidden" name="id" value="{{uid._id}}">
 		<input type="reset">
-		<input type="submit" style="margin-left:150px;" onmousedown="validate()" placeholder="Save">
+		<input type="submit" style="margin-left:150px;" placeholder="Save">
 		</form>
 	</div>
 	<script src="/js/changeInfo.js"></script>
