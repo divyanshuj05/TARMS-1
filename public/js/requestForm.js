@@ -1,3 +1,9 @@
+let date=document.forms["form"]["eventDate"];
+let tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate()+1);
+let tom=tomorrow.toISOString().slice(0, 10);
+date.value=tom;
+
 function validate()
 {
     let x=document.getElementById("getName").value;
@@ -38,9 +44,12 @@ function validate()
     }
 
     let date=document.forms["form"]["eventDate"].value;
-    if(date=="")
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    let tom=tomorrow.toISOString().slice(0, 10);
+    if(date!=tom)
     {
-        alert("Input date");
+        alert("Date not entred/not correct");
         return false;
     }
 

@@ -32,8 +32,8 @@ app.use(session(
         saveUninitialized:false,
         store:store
     }
-))
- 
+)) 
+
 //load routes
 const routes=require("./routes/main");
 const { collection } = require("./models/user");

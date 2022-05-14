@@ -399,3 +399,14 @@ exports.deleteRequest=async(req,res)=>{
         res.send("Some error occured")
     })
 }
+
+setTimeout(() => 
+{
+    rooms.updateMany({},{$set:{"Status":"Available"}})
+    .then(data=>{
+        console.log("24 hour reset!!")
+    })
+    .catch(err=>{
+        res.send("Some error occured");
+    })
+}, 60000*60*24);

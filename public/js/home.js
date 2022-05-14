@@ -1,8 +1,10 @@
-document.getElementById("myDate").value=getDate();
+document.getElementById("myDate").innerHTML=getDate();
 function getDate()
 {
-    let today = new Date().toISOString().slice(0, 10);
-    return today;
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    let tom=tomorrow.toISOString().slice(0, 10);
+    return tom;
 }
 function validate()
 {
