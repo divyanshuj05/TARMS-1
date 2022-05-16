@@ -9,6 +9,7 @@ const { response } = require('express');
 const mongoose=require("mongoose");
 const async = require('hbs/lib/async');
 const session=require('express-session');
+const res = require('express/lib/response');
 mongoose.connect("mongodb://localhost:27017/test",(err,coll)=>{
     if(err){
         console.error("Database not connected");
@@ -408,5 +409,12 @@ setTimeout(() =>
     })
     .catch(err=>{
         res.send("Some error occured");
+    })
+    Booking_form.updateMany({"Status":"Requested"},{$set:{"Status":"Request Timed Out"}})
+    .then(data=>{
+        console.log("Booking collection also updated after 24 hour reset");
+    })
+    .catch(err=>{
+        res.send("Some error occured" || err);
     })
 }, 60000*60*24);
