@@ -1,11 +1,14 @@
 {
   "name": "arms",
+  "homepage": "https://divyanshuj05.github.io/TARMS-1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/index.js -e js,hbs,css"
+    "server": "nodemon src/index.js -e js,hbs,css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +19,7 @@
     "connect-mongodb-session": "^3.1.1",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "gh-pages": "^4.0.0",
     "hbs": "^4.2.0",
     "mongoose": "^6.3.0",
     "nodemon": "^2.0.15"
